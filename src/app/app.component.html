@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Moves Explore</h1>
+  <h1 class="border p-4 display-4">Moves Explore</h1>
+  
+  <button (click)="getData()">getData</button>
+  <div *ngIf="!MoviesCatagories">
+    <div class="spinner-border text-danger" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!MoviesCatagories">{{MoviesCatagories | json}}</div>
+  
+  
+  <app-movies-list></app-movies-list>
+</div>
+<!-- create a button and on click call getData() -->
+<!-- <button  class="btn btn-primary">Get Data</button> -->
