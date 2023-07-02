@@ -10,6 +10,14 @@
   </div>
   <div *ngIf="!MoviesCatagories">{{MoviesCatagories | json}}</div>
   
+  <div>
+    <h1>Movie Catagories</h1>
+    <ul>
+      <li *ngFor="let catagory of MoviesCatagories">
+        {{catagory}}
+      </li>
+    </ul>
+  </div>
   
   <app-movies-list></app-movies-list>
 </div>
