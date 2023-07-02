@@ -1,0 +1,17 @@
+<p>movies-list works!</p>
+
+//print the list of movies
+<div *ngIf="MoviesTitles" class="d-flex align-items-center flex-wrap gap-2">
+    <div class="card" *ngFor="let Movie of MoviesTitles">
+          <app-move [movie]="Movie" ></app-move>
+    </div>
+
+    <div *ngIf="MoviesTitles.length == 0">
+        <!-- display in bootstrap alert -->
+        <div class="alert alert-danger" role="alert">
+            There are no movies to display
+        </div>
+    </div>
+</div>
+
+
