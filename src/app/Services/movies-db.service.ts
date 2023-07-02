@@ -29,6 +29,9 @@ export class MoviesDbService {
     console.log('here is the new urel' + this.url);
     return this.http.get<MoviesTitlesPage>(this.url, { headers: this.headers });
   }
+
+  // ...
+  
   getLocalMoviesTitles(): Observable<MoviesTitlesPage> {
     const localMoviesTitles = localStorage.getItem('MoviesTitles');
   
@@ -44,6 +47,21 @@ export class MoviesDbService {
     }
   }
   
+  
+
+  //Url customize
+  customizeUrl(url: string, Options: TitlesOPtions): string {
+    var _OptionsArr = Object.entries(Options).map((x) => `${x[0]}=${x[1]}`);
+
+    if (_OptionsArr.length > 0) {
+      url += `?`;
+      _OptionsArr.forEach((x) => {
+        url += `${x}&`;
+      });
+      url = url.slice(0, -1);
+    }
+    return url;
+  }
 }
 
 export interface Response {
