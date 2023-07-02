@@ -7,6 +7,18 @@ import { MoviesTitlesPage } from '../Models/IModels';
   providedIn: 'root',
 })
 export class MoviesDbService {
+  BaseUrl = 'https://moviesdatabase.p.rapidapi.com';
+  url = `${this.BaseUrl}/titles/utils/genres`;
+  constructor(private http: HttpClient) {}
+  headers = new HttpHeaders({
+    'X-RapidAPI-Key': '4666a2a4b4msh0cc6166122f407bp14a593jsnfb60d78690cb',
+    'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
+  });
+
+  // catagories
+  getMoviesCatagories(): Observable<Response> {
+    return this.http.get<Response>(this.url, { headers: this.headers });
+  }
 }
 
 export interface Response {
