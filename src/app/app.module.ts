@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { MoveComponent } from './move/move.component';
 import { MoviesListComponent } from './movies-list/movies-list.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoveComponent,
-    MoviesListComponent
+    MoviesListComponent,
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
