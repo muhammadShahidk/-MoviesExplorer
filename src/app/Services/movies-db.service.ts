@@ -19,6 +19,16 @@ export class MoviesDbService {
   getMoviesCatagories(): Observable<Response> {
     return this.http.get<Response>(this.url, { headers: this.headers });
   }
+
+  //Movies titles
+  getMoviesTitles(options?: TitlesOPtions): Observable<MoviesTitlesPage> {
+    this.url = `${this.BaseUrl}/titles`;
+    //adding options to url
+    if (options) this.url = this.customizeUrl(this.url, options);
+
+    console.log('here is the new urel' + this.url);
+    return this.http.get<MoviesTitlesPage>(this.url, { headers: this.headers });
+  }
 }
 
 export interface Response {
