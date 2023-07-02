@@ -29,6 +29,21 @@ export class MoviesDbService {
     console.log('here is the new urel' + this.url);
     return this.http.get<MoviesTitlesPage>(this.url, { headers: this.headers });
   }
+  getLocalMoviesTitles(): Observable<MoviesTitlesPage> {
+    const localMoviesTitles = localStorage.getItem('MoviesTitles');
+  
+    if (localMoviesTitles == null) {
+      return this.getMoviesTitles({year:2022,list:'most_pop_movies',limit:25}).pipe(
+        tap((moviesTitles: MoviesTitlesPage) => {
+          localStorage.setItem('MoviesTitles', JSON.stringify(moviesTitles));
+        })
+      );
+    } else {
+      const moviesTitles: MoviesTitlesPage = JSON.parse(localMoviesTitles);
+      return of(moviesTitles);
+    }
+  }
+  
 }
 
 export interface Response {
