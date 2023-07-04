@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { MoviesDbService, TitlesOPtions } from '../Services/movies-db.service';
-import { MoveTitleDetails, MoviesTitlesPage } from '../Models/IModels';
+import { MoviesDbService, TitlesOPtions } from '../../Services/movies-db.service';
+import { MoveTitleDetails, MoviesTitlesPage } from '../../Models/IModels';
 
 @Component({
   selector: 'app-movies-list',

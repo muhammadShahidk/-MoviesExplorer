@@ -1,5 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core';
-import { MoveTitleDetails } from '../Models/IModels';
+import { MoveTitleDetails } from '../../Models/IModels';
 import {
   trigger,
   state,

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { TitlesOPtions } from '../Services/movies-db.service';
+import { TitlesOPtions } from '../../Services/movies-db.service';
 
 @Component({
   selector: 'app-filters',
