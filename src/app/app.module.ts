@@ -12,6 +12,7 @@ import { FiltersComponent } from './Components/filters/filters.component';
 import { FormsModule } from '@angular/forms';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MoveDetailsComponent } from './Components/move-details/move-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MoviesListComponent,
     HeaderComponent,
     SidebarComponent,
-    FiltersComponent
+    FiltersComponent,
+    MoveDetailsComponent
   ],
   imports: [
     BrowserModule,
