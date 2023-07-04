@@ -8,6 +8,10 @@ import { MoveComponent } from './move/move.component';
 import { MoviesListComponent } from './movies-list/movies-list.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { FiltersComponent } from './filters/filters.component';
+import { FormsModule } from '@angular/forms';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,12 +19,16 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MoveComponent,
     MoviesListComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,       
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    LazyLoadImageModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

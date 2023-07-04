@@ -10,6 +10,8 @@ import { MoviesDbService } from './Services/movies-db.service';
 export class AppComponent {
   title = 'MovesExplorer';
   MoviesCatagories!:[];
+  selectedCatagory!:string;
+
   constructor(private Db: MoviesDbService) { }
 
   getData(){
@@ -20,5 +22,11 @@ export class AppComponent {
       complete: () => console.info('complete')
     });
     this.Db.getMoviesCatagories().subscribe()
+  }
+
+
+  sideBarResponse(event: string) {
+    console.log(event);
+    this.selectedCatagory = event;
   }
 }
