@@ -1,10 +1,15 @@
-<p>movies-list works!</p>
-
-//print the list of movies
+<app-filters (FilterdOptions)="filteredOptions($event)"></app-filters>
 <div *ngIf="MoviesTitles" class="d-flex align-items-center flex-wrap gap-2">
-    <div class="card" *ngFor="let Movie of MoviesTitles">
-          <app-move [movie]="Movie" ></app-move>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-3 " *ngFor="let Movie of MoviesTitles">
+
+                <app-move [movie]="Movie"></app-move>
+
+            </div>
+        </div>
     </div>
+
 
     <div *ngIf="MoviesTitles.length == 0">
         <!-- display in bootstrap alert -->
@@ -13,5 +18,3 @@
         </div>
     </div>
 </div>
-
-
