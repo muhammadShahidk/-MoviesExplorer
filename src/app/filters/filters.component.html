@@ -1,1 +1,113 @@
-<p>filters works!</p>
+<div class="filters mb-2">
+    <h4>Filters</h4>
+    <!-- startYear -->
+    <!-- titleType -->
+    <!-- list -->
+    <!-- year -->
+    <!-- sort -->
+    <!-- page -->
+    <!-- info -->
+    <!-- endYear -->
+    <!-- limit -->
+    <!-- create inputs for above things -->
+    <!-- years Filters -->
+    <div class="Years  ">
+        <p>Years</p>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="Second group">
+
+                <button *ngFor="let year of YearsFilter" type="button" class="btn btn-outline-secondary"
+                [class.active]="Options.year === year"
+                    (click)="SetYear(year)">
+                    {{ year }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <!-- Title Types -->
+            <div class="col-4">
+
+                <div class="titleType ">
+                    <span>TitleType</span>
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group me-2" role="group" aria-label="Second group">
+                            <button *ngFor="let titleType of titleTypeFilter"  type="button"
+                                class="btn btn-outline-secondary"
+                                (click)="SetTitleType(titleType)">
+                                {{titleType}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- create list as dropdown -->
+            <div class="col-4">
+                <div class="list overflow-x-scroll ">
+                    <span class="position-sticky" style="left: 5;">List</span>
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group me-2" role="group" aria-label="Second group">
+                            <button *ngFor="let list of listFilters" type="button"
+                                class="btn btn-outline-secondary"
+                                (click)="SetList(list)" >
+                                {{list}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Movies Limit -->
+            <div class="col-4">
+                <label for="customRange2" class="form-label">
+                    Limit
+                    <span class="badge rounded-pill text-bg-primary">{{Options.limit}}</span>
+
+                </label>
+                <input type="range" class="form-range" min="10" max="50" id="customRange2" [(ngModel)]="Options.limit">
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="advanseFilters">
+        <h5>Advansed Filters</h5>
+        <div class="container">
+            <div class="row gap-2">
+                <!-- start year -->
+                <div class="col-2">
+                    <input class="form-control d-inline-block" type="number" [(ngModel)]="Options.startYear"
+                        name="startYear" placeholder="startYear">
+                </div>
+                <!-- end year -->
+                <div class="col-2">
+                    <input class="form-control d-inline-block" type="number" [(ngModel)]="Options.endYear"
+                        name="endYear" placeholder="endYear">
+                </div>
+                <!-- sort -->
+                <div class="col-2">
+                    <input class="form-control d-inline-block" type="text" [(ngModel)]="Options.sort" name="sort"
+                        placeholder="sort">
+                </div>
+
+                <!-- Get Genre from the sidebar -->
+
+            </div>
+
+
+        </div>
+        {{Options | json}}
+
+
+    </div>
+    <div class="buttons col-12 d-flex justify-content-end">
+
+        <div class="actionsBtn d-block ">
+            <button class="btn m-2 btn-success " (click)="applyFilters()">Apply</button>
+            <button class="btn btn-secondary ">Hide</button>
+        </div>
+    </div>
+
+</div>
