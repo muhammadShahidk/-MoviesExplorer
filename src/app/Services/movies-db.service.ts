@@ -9,11 +9,45 @@ import { MoviesTitlesPage } from '../Models/IModels';
 export class MoviesDbService {
   BaseUrl = 'https://moviesdatabase.p.rapidapi.com';
   url = `${this.BaseUrl}/titles/utils/genres`;
-  constructor(private http: HttpClient) {}
   headers = new HttpHeaders({
     'X-RapidAPI-Key': '4666a2a4b4msh0cc6166122f407bp14a593jsnfb60d78690cb',
     'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
   });
+
+  //Sported Genres
+  sportedGenres = [
+    ,
+    'Action',
+    'Adult',
+    'Adventure',
+    'Animation',
+    'Biography',
+    'Comedy',
+    'Crime',
+    'Documentary',
+    'Drama',
+    'Family',
+    'Fantasy',
+    'Film-Noir',
+    'Game-Show',
+    'History',
+    'Horror',
+    'Music',
+    'Musical',
+    'Mystery',
+    'News',
+    'Reality-TV',
+    'Romance',
+    'Sci-Fi',
+    'Short',
+    'Sport',
+    'Talk-Show',
+    'Thriller',
+    'War',
+    'Western',
+  ];
+
+  constructor(private http: HttpClient) {}
 
   // catagories
   getMoviesCatagories(): Observable<Response> {
@@ -26,40 +60,56 @@ export class MoviesDbService {
     //adding options to url
     if (options) this.url = this.customizeUrl(this.url, options);
 
-    console.log('here is the new urel' + this.url);
+    console.log('here is the new url' + this.url);
     return this.http.get<MoviesTitlesPage>(this.url, { headers: this.headers });
   }
 
   // ...
-  
+
   getLocalMoviesTitles(): Observable<MoviesTitlesPage> {
+    //getting local movies titles
     const localMoviesTitles = localStorage.getItem('MoviesTitles');
-  
+
     if (localMoviesTitles == null) {
-      return this.getMoviesTitles({year:2022,list:'most_pop_movies',limit:25}).pipe(
+      return this.getMoviesTitles({
+        year: 2022,
+        list: 'most_pop_movies',
+        limit: 25,
+      }).pipe(
         tap((moviesTitles: MoviesTitlesPage) => {
           localStorage.setItem('MoviesTitles', JSON.stringify(moviesTitles));
         })
       );
     } else {
       const moviesTitles: MoviesTitlesPage = JSON.parse(localMoviesTitles);
+
       return of(moviesTitles);
     }
   }
-  
-  
 
   //Url customize
-  customizeUrl(url: string, Options: TitlesOPtions): string {
-    var _OptionsArr = Object.entries(Options).map((x) => `${x[0]}=${x[1]}`);
+  // customizeUrl(url: string, Options: TitlesOPtions): string {
+  //   var _OptionsArr = Object.entries(Options).map((x) => `${x[0]}=${x[1]}`);
+
+  //   if (_OptionsArr.length > 0) {
+  //     url += `?`;
+  //     _OptionsArr.forEach((x) => {
+  //       url += `${x}&`;
+  //     });
+  //     url = url.slice(0, -1);
+  //   }
+  //   return url;
+  // }
+
+  customizeUrl(url: string, options: TitlesOPtions): string {
+    const _OptionsArr = Object.entries(options)
+      .filter(([key, value]) => value) // Filter out falsy values
+      .map(([key, value]) => `${key}=${value}`); // Construct key-value pairs
 
     if (_OptionsArr.length > 0) {
-      url += `?`;
-      _OptionsArr.forEach((x) => {
-        url += `${x}&`;
-      });
-      url = url.slice(0, -1);
+      url += '?' + _OptionsArr.join('&'); // Join key-value pairs with '&'
     }
+
     return url;
   }
 }
@@ -97,10 +147,15 @@ export interface TitlesOPtions {
     | 'Talk-Show'
     | 'Thriller'
     | 'War'
-    | 'Western';
+    | 'Western'
+    | string;
   startYear?: number;
   titleType?: string;
-  list?: 'most_pop_movies' | 'most_pop_series' | 'top_rated_series_250';
+  list?:
+    | 'most_pop_movies'
+    | 'most_pop_series'
+    | 'top_rated_series_250'
+    | string;
   year?: number;
   sort?: string;
   page?: string;
