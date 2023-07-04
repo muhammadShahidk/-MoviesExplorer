@@ -1,1 +1,7 @@
-<p>sidebar works!</p>
+<div class="sidebar shadow">
+  <ul class="list-unstyled">
+    <li *ngFor="let option of sibarOptions">
+      <a (click)="HandleClick($event)" class="categoryLink" href="#">{{option}}</a>
+    </li>
+  </ul>
+</div>
