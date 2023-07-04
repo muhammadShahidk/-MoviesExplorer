@@ -23,7 +23,7 @@ export class FiltersComponent {
   SetYear(year:number){
     if (this.Options.year === year) {
       // If the clicked year is already selected, remove the active class and clear the Options value
-      this.Options.year = undefined;
+      this.Options.year = 0;
     } else {
       this.Options.year = year; // Update the selected year
     }
@@ -32,11 +32,21 @@ export class FiltersComponent {
   }
 
   SetTitleType(titleType:string){
-    this.Options.titleType =titleType; 
+    if (this.Options.titleType === titleType) {
+      // If the clicked titleType is already selected, remove the active class and clear the Options value
+      this.Options.titleType = '';
+    } else {
+      this.Options.titleType = titleType; // Update the selected year
+    }
     console.log(titleType);
   }
   SetList(list:string){
-    this.Options.list =list; 
+    if (this.Options.list === list) {
+      // If the clicked list is already selected, remove the active class and clear the Options value
+      this.Options.list = '';
+    } else {
+      this.Options.list = list; // Update the selected year
+    }
     console.log(list);
   }
 }

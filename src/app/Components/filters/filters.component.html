@@ -36,6 +36,7 @@
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2" role="group" aria-label="Second group">
                             <button *ngFor="let titleType of titleTypeFilter"  type="button"
+                            [class.active]="Options.titleType === titleType"
                                 class="btn btn-outline-secondary"
                                 (click)="SetTitleType(titleType)">
                                 {{titleType}}
@@ -51,6 +52,7 @@
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2" role="group" aria-label="Second group">
                             <button *ngFor="let list of listFilters" type="button"
+                                 [class.active]="Options.list === list"
                                 class="btn btn-outline-secondary"
                                 (click)="SetList(list)" >
                                 {{list}}
