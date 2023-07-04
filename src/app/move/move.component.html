@@ -1,11 +1,20 @@
-<div class="card move" style="width: 10rem;">
-    <img [src]="movie.primaryImage.url" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{movie.originalTitleText.text}}</h5>
-      <p class="card-text">
-        releaseDate: {{movie.releaseDate}}
-        releaseYear: {{movie.releaseYear.year}}
-        Type: {{movie.titleType.text}}
-     </p>
-    </div>
+<div class="card move col-12">
+  <!-- lazy image loading -->
+  <img [className]="!imageLoadedFlag? 'opacity-0':''"  @moveInLeft [lazyLoad]="movie.primaryImage.url" (load)="imageLoaded()">
+  <!-- checking if the image is loaded -->
+  <div *ngIf="!imageLoadedFlag">
+    <p class="card-text placeholder-glow">
+      <span class="myOverlay placeholder col-7" ></span>
+    </p>
+  </div>
+  <!-- Movie Details -->
+  <div class="card-body">
+    <h5 class="card-title">{{movie.originalTitleText.text}}</h5>
+    <p class="card-text">
+      releaseDate: {{movie.releaseDate}}
+      releaseYear: {{movie.releaseYear.year}}
+      Type: {{movie.titleType.text}}
+    </p>
+  </div>
 </div>
+
