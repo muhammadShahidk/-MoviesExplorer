@@ -12,7 +12,6 @@ export interface MoveTitleDetails {
     titleText: TitleText
     originalTitleText: OriginalTitleText
     releaseYear: ReleaseYear
-    releaseDate: Date
   }
   
   export interface PrimaryImage {
