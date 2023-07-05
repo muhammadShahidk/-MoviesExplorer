@@ -1,13 +1,14 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { MoviesDbService, TitlesOPtions } from '../../Services/movies-db.service';
 import { MoveTitleDetails, MoviesTitlesPage } from '../../Models/IModels';
-
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent {
+  // get this id exampleModal element ref
+
   constructor(private Moves:MoviesDbService) { }
   @Input() genre!:string;
   // Page!:;
@@ -32,6 +33,15 @@ export class MoviesListComponent {
       complete: () => console.log(this.MoviesTitles)
       // console.log(this.MoviesTitles.Results.map((x)=>x.titleText.text));
     });  
+
+    //  this.Moves.getLocalMoviesTitles().subscribe( r=>this.MoviesTitles = r.results.filter((x)=>x.primaryImage != null));
+
+    //  const localMoviesTitles = localStorage.getItem('MoviesTitles');
+    // this.MoviesTitles = JSON.parse(localMoviesTitles);
+    //  const moviesTitles: MoviesTitlesPage = JSON.parse(localMoviesTitles?localMoviesTitles:'');
+    //   this.MoviesTitles = moviesTitles.results.filter((x)=>x.primaryImage != null);
+    //   console.log(this.MoviesTitles);
+    //   console.log("here is the local movies titles");
   }
   
   filteredOptions(newOptions:TitlesOPtions){
@@ -44,13 +54,16 @@ export class MoviesListComponent {
       // console.log(this.MoviesTitles.Results.map((x)=>x.titleText.text));
     });
   }
-     //this.Moves.getLocalMoviesTitles().subscribe( r=>this.MoviesTitles = r.results.filter((x)=>x.primaryImage != null));
-    //  const localMoviesTitles = localStorage.getItem('MoviesTitles');
 
-    //  const moviesTitles: MoviesTitlesPage = JSON.parse(localMoviesTitles?localMoviesTitles:'');
-    //   this.MoviesTitles = moviesTitles.results.filter((x)=>x.primaryImage != null);
-    //   console.log(this.MoviesTitles);
-    //   console.log("here is the local movies titles");
+  SelectedMove!:MoveTitleDetails;
+  // show details
+  ShowDetails(movie:MoveTitleDetails){
+    console.log(movie)
+    this.SelectedMove = movie;
+    //this.SelectedMove.originalTitleText.text
+    
+  }
+    
 
   
 

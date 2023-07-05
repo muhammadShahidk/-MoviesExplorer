@@ -104,7 +104,7 @@ export class MoviesDbService {
   customizeUrl(url: string, options: TitlesOPtions): string {
     const _OptionsArr = Object.entries(options)
       .filter(([key, value]) => value) // Filter out falsy values
-      .map(([key, value]) => `${key}=${value}`); // Construct key-value pairs
+      .map(([key, value]) => `${key}=${value}`); // Construct key-value pairs url parameters
 
     if (_OptionsArr.length > 0) {
       url += '?' + _OptionsArr.join('&'); // Join key-value pairs with '&'
