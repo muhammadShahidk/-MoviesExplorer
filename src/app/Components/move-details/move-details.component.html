@@ -1,1 +1,63 @@
-<p>move-details works!</p>
+<!-- <div class="MoveDetials">
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+             <img [src]="Movie?Movie.primaryImage.url:''" class="img-fluid" alt="..."> -->
+<!-- <img  [src]="'../../../assets/dummay.jpg'" class="img-fluid h-50" alt="..."> -->
+<!-- <p>type: {{Movie?.titleType?.id}}</p>
+            <p>releaseYear: {{Movie?.releaseYear?.year}}</p>
+            <p>endYear: {{Movie?.releaseYear?.endYear}}</p>
+        </div>
+        <div class="col-4">
+            <p>titleType isSeries : {{Movie?.titleType?.isSeries}}</p>
+            <p>titleType isEpisode : {{Movie?.titleType?.isEpisode}}</p>
+            <p>titleType text : {{Movie?.titleType?.text}}</p>
+            <p>primaryImage.caption : {{Movie?.primaryImage?.caption}}</p>
+
+            {{Movie|json}}
+            
+        </div>
+        
+    </div>
+</div>
+</div> -->
+
+<!-- netflex exmaple -->
+<div class="moveDetials border m-auto ">
+    <div class="close"><button type="button" class="MClosse btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button></div>
+
+    <div class="moveDetials__img">
+        <img [src]="Movie?Movie.primaryImage.url:''" class="img-fluid w-100" alt="...">
+
+    </div>
+    <!-- create a dive and show dumay move details init -->
+    <div class="detials p-3 bg-black">
+        <h1>Laga</h1>
+        <p>Lorem ipsum dolor sit am</p>
+        <h3>Recomended Moves</h3>
+        <div class="row g-2">
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-4">
+                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>

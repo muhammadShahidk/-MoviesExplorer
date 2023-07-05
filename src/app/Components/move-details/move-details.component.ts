@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MoveTitleDetails } from 'src/app/Models/IModels';
 
 @Component({
   selector: 'app-move-details',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./move-details.component.css']
 })
 export class MoveDetailsComponent {
+  @Input() Movie?:MoveTitleDetails ;
 
 }

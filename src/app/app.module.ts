@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MoveDetailsComponent } from './Components/move-details/move-details.component';
+import { PopupModelComponent } from './Components/popup-model/popup-model.component';
+import { AddModalPropertiesDirective } from './Directives/add-modal-properties.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MoveDetailsComponent } from './Components/move-details/move-details.com
     HeaderComponent,
     SidebarComponent,
     FiltersComponent,
-    MoveDetailsComponent
+    MoveDetailsComponent,
+    PopupModelComponent,
+    AddModalPropertiesDirective
   ],
   imports: [
     BrowserModule,
