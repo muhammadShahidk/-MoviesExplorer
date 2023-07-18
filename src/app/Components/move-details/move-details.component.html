@@ -1,62 +1,46 @@
-<!-- <div class="MoveDetials">
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-             <img [src]="Movie?Movie.primaryImage.url:''" class="img-fluid" alt="..."> -->
-<!-- <img  [src]="'../../../assets/dummay.jpg'" class="img-fluid h-50" alt="..."> -->
-<!-- <p>type: {{Movie?.titleType?.id}}</p>
-            <p>releaseYear: {{Movie?.releaseYear?.year}}</p>
-            <p>endYear: {{Movie?.releaseYear?.endYear}}</p>
-        </div>
-        <div class="col-4">
-            <p>titleType isSeries : {{Movie?.titleType?.isSeries}}</p>
-            <p>titleType isEpisode : {{Movie?.titleType?.isEpisode}}</p>
-            <p>titleType text : {{Movie?.titleType?.text}}</p>
-            <p>primaryImage.caption : {{Movie?.primaryImage?.caption}}</p>
 
-            {{Movie|json}}
-            
-        </div>
-        
-    </div>
-</div>
-</div> -->
-
-<!-- netflex exmaple -->
 <div class="moveDetials border m-auto ">
     <div class="close"><button type="button" class="MClosse btn-close" data-bs-dismiss="modal"
             aria-label="Close"></button></div>
 
     <div class="moveDetials__img">
-        <img [src]="Movie?Movie.primaryImage.url:''" class="img-fluid w-100" alt="...">
+        <!-- <img [src]="Movie?Movie.primaryImage.url:''" class="img-fluid w-100" alt="..."> -->
+        <app-lazy-load-imag [Classes]="'w-100 h-100'" [url]="Movie?.primaryImage?.url"></app-lazy-load-imag>
 
     </div>
     <!-- create a dive and show dumay move details init -->
-    <div class="detials p-3 bg-black">
-        <h1>Laga</h1>
+    <div class="detials p-3 ">
+        <h1>{{Movie?.titleText?.text}}</h1>
         <p>Lorem ipsum dolor sit am</p>
-        <h3>Recomended Moves</h3>
+        <h3>Metadata</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{Movie?.titleText?.text}}</h5>
+                <p class="card-text"><strong>Release Year:</strong> {{Movie?.releaseYear?.year}}</p>
+                <p class="card-text"><strong>Title Type:</strong> {{Movie?.titleType?.text}}</p>
+                <p class="card-text"><strong>Original Title:</strong> {{Movie?.originalTitleText?.text}}</p>
+                <p class="card-text"><strong>Caption:</strong> {{Movie?.primaryImage?.caption?.plainText}}</p>
+                <p class="card-text"><strong>ID:</strong> {{Movie?.id}}</p>
+                <p class="card-text"><strong>Width:</strong> {{Movie?.primaryImage?.width}}</p>
+                <p class="card-text"><strong>Height:</strong> {{Movie?.primaryImage?.height}}</p>
+                <p class="card-text"><strong>Is Series:</strong> {{Movie?.titleType?.isSeries ? 'Yes' : 'No'}}</p>
+                <!-- <p class="card-text"><strong>Page:</strong> {{MoviesPage?.page}}</p>
+                <p class="card-text"><strong>Next:</strong> {{MoviesPage?.next}}</p>
+                <p class="card-text"><strong>Number of Entries:</strong> {{MoviesPage?.entries}}</p> -->
+                <!-- Add more movie details as needed -->
+            </div>
+        </div>
+
+
+        <h3>Recommended Moves</h3>
         <div class="row g-2">
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            <div *ngIf="!RandomMovies" class="row g-2">
+                <div  *ngFor="let m of [1,2,3]" class="col-4">
+                    <app-lazy-load-imag   [url]="'../../../assets/lagan.jpg'"></app-lazy-load-imag >
+                </div>
             </div>
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-4">
-                <img src="../../../assets/dummay.jpg" class="img-fluid" alt="">
+            <div *ngFor="let m of RandomMovies" class="col-4">
+                <app-lazy-load-imag (click)="ShowMove(m)"  [url]="m?.primaryImage?.url"></app-lazy-load-imag >
             </div>
         </div>
     </div>

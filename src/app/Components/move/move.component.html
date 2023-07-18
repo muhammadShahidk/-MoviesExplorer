@@ -1,11 +1,11 @@
 <div class="card move col-12">
   <!-- lazy image loading -->
-  <!-- <img src="../../../assets/dummay.jpg" alt=""> -->
+  <!-- <img src="../../../assets/lagan.jpg" alt=""> -->
   <img [className]="!imageLoadedFlag? 'opacity-0':''" 
         [offset]="100" @moveInLeft
       
          [lazyLoad]="movie?movie.primaryImage.url:''"
-          (load)="imageLoaded()"
+        (load)="imageLoaded()"
           >
   <!-- checking if the image is loaded -->
   <div *ngIf="!imageLoadedFlag">

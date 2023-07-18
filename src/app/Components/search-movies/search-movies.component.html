@@ -1,0 +1,8 @@
+<input type="text" (change)="searchMovies($event)" placeholder="Search movies...">
+<ul>
+  <li *ngFor="let result of searchResults">
+
+   <img class="col-4 rounded-circle" height="50px" [src]="result?result?.primaryImage?.url:''" alt=""/>  
+     {{result?.titleText?.text}}
+  </li>
+</ul>

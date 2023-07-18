@@ -1,0 +1,24 @@
+.sidebar {
+    width: 300px; /* Adjust the width as per your sidebar's requirements */
+    height: 100vh;
+    background-color: #f1f1f1; /* Set the background color of the sidebar */
+    position: fixed;
+    top: 0;
+    left: -300px; /* Move the sidebar off the screen initially */
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar.active {
+    left: 0; /* Show the sidebar by bringing it to the left edge of the screen */
+  }
+  
+  .sidebar-backdrop {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Set the background color and opacity of the backdrop */
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none; /* Hide the backdrop initially */
+  }
+  

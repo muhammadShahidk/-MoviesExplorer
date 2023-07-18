@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,6 +37,7 @@ sibarOptions = [
 
 ]
 
+//create input to recive the open or close event
 @Output() selectedOption = new EventEmitter<string>();
 HandleClick(event:MouseEvent){
   const target = event.target as HTMLElement;

@@ -13,6 +13,7 @@ export class MoviesListComponent {
   @Input() genre!:string;
   // Page!:;
   MoviesTitles!:MoveTitleDetails[];
+  sportedGenres = this.Moves.sportedGenres;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['genre']) {
@@ -27,7 +28,7 @@ export class MoviesListComponent {
   }
 
   ngOnInit(): void {
-    this.Moves.getMoviesTitles({genre:'Action',page:'1',year:2001,list:'most_pop_movies',limit:10}).subscribe( {
+    this.Moves.getMoviesTitlesWitSizeLimit({genre:'Action',page:'1',year:2001,list:'most_pop_movies',limit:10},0.5).subscribe( {
       next: (v:MoviesTitlesPage) => this.MoviesTitles = v.results.filter((x)=>x.primaryImage != null),
       error: (e) => console.error(e),
       complete: () => console.log(this.MoviesTitles)

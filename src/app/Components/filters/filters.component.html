@@ -31,8 +31,8 @@
             <!-- Title Types -->
             <div class="col-4">
 
-                <div class="titleType ">
-                    <span>TitleType</span>
+                <div class="titleType  overflow-x-scroll ">
+                    <span class="position-sticky" style="left: 5;">TitleType</span>
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2" role="group" aria-label="Second group">
                             <button *ngFor="let titleType of titleTypeFilter"  type="button"
@@ -70,6 +70,16 @@
                 </label>
                 <input type="range" class="form-range" min="10" max="50" id="customRange2" [(ngModel)]="Options.limit">
             </div>
+            <!-- create select options dropdown list for genre -->
+            <div class="col-4">
+                <div class="genre">
+                    <span>Genre</span>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="Options.genre">
+                        <option selected>Open this select menu</option>
+                        <option *ngFor="let genre of genreFilters" [value]="genre">{{genre}}</option>
+                    </select>
+                </div>
+           
         </div>
     </div>
 

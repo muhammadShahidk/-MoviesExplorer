@@ -27,6 +27,8 @@ export class AppComponent {
 
   sideBarResponse(event: string) {
     console.log(event);
+    
     this.selectedCatagory = event;
+    return 'false';
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
-import { MoviesTitlesPage } from '../Models/IModels';
+import { Observable, map, of, tap } from 'rxjs';
+import { MoveTitleDetails, MoviesTitlesPage } from '../Models/IModels';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,6 @@ export class MoviesDbService {
   sportedGenres = [
     ,
     'Action',
-    'Adult',
     'Adventure',
     'Animation',
     'Biography',
@@ -64,6 +63,32 @@ export class MoviesDbService {
     return this.http.get<MoviesTitlesPage>(this.url, { headers: this.headers });
   }
 
+  getMoviesTitlesWitSizeLimit(options: TitlesOPtions, maxBannerSizeMb?: number): Observable<MoviesTitlesPage> {
+    const url = `${this.BaseUrl}/titles`;
+    const customizedUrl = this.customizeUrl(url, options);
+    
+    return this.http.get<MoviesTitlesPage>(customizedUrl, { headers: this.headers }).pipe(
+      map((movies: MoviesTitlesPage) => {
+        if (maxBannerSizeMb) {
+          movies.results = movies.results.filter((movie: MoveTitleDetails) => {
+            //check if width and height are not null
+            if (!movie.primaryImage?.width || !movie.primaryImage?.height) {
+              return false;
+            }
+            else{
+              const bannerSizeMb = movie.primaryImage.width * movie.primaryImage.height * 0.000001;
+              console.log("bannerSizeMb" + bannerSizeMb);
+              return bannerSizeMb <= maxBannerSizeMb;
+
+            }
+            
+          });
+        }
+        return movies;
+      })
+    );
+  }
+  
   // ...
 
   getLocalMoviesTitles(): Observable<MoviesTitlesPage> {
@@ -87,6 +112,83 @@ export class MoviesDbService {
     }
   }
 
+  // ......................gpt
+  // Get upcoming titles
+  getUpcomingTitles(): Observable<MoviesTitlesPage> {
+    const url = `${this.BaseUrl}/titles/x/upcoming`;
+    return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
+  }
+
+  // Get ratings for a title
+  getTitleRatings(id: string): Observable<any> {
+    const url = `${this.BaseUrl}/titles/${id}/ratings`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get crew for a title
+  getTitleCrew(id: string): Observable<any> {
+    const url = `${this.BaseUrl}/titles/${id}/crew`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get episodes for a series
+  getSeriesEpisodes(
+    seriesId: string,
+    season?: string
+  ): Observable<MoviesTitlesPage> {
+    let url = `${this.BaseUrl}/titles/series/${seriesId}`;
+    if (season) {
+      url += `/${season}`;
+    }
+    return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
+  }
+
+  // Get details of an episode
+  getEpisodeDetails(id: string): Observable<any> {
+    const url = `${this.BaseUrl}/titles/episode/${id}`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get main actors for a title
+  getMainActors(id: string): Observable<any> {
+    const url = `${this.BaseUrl}/titles/${id}/main_actors`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get titles by IDs
+  getTitlesByIds(ids: string[]): Observable<MoviesTitlesPage> {
+    const url = `${this.BaseUrl}/titles/x/titles-by-ids`;
+    const params = { ids: ids.join(',') };
+    return this.http.get<MoviesTitlesPage>(url, {
+      headers: this.headers,
+      params,
+    });
+  }
+
+  // Get alternate titles for a title
+  getAlternateTitles(id: string): Observable<any> {
+    const url = `${this.BaseUrl}/titles/${id}/aka`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get a random title
+  getRandomTitle(options:TitlesOPtions): Observable<MoviesTitlesPage> {
+    let url = `${this.BaseUrl}/titles/random`;
+    url = this.customizeUrl(url, options);
+    return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
+  }
+
+  // Get details of a title
+  getTitleDetails(id: string): Observable<any> {
+    const url = `${this.BaseUrl}/titles/${id}`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get all titles
+  getAllTitles(): Observable<MoviesTitlesPage> {
+    const url = `${this.BaseUrl}/titles`;
+    return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
+  }
   //Url customize
   // customizeUrl(url: string, Options: TitlesOPtions): string {
   //   var _OptionsArr = Object.entries(Options).map((x) => `${x[0]}=${x[1]}`);
@@ -100,6 +202,32 @@ export class MoviesDbService {
   //   }
   //   return url;
   // }
+
+  // ----search methods
+  // Search movies by keyword
+  searchMoviesByKeyword(keyword: string): Observable<MoviesTitlesPage> {
+    const url = `${this.BaseUrl}/titles/search/keyword/${keyword}`;
+    console.log("url" + url);
+    return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
+  }
+
+  // Search movies by title
+  searchMoviesByTitle(title: string): Observable<MoviesTitlesPage> {
+    const url = `${this.BaseUrl}/titles/search/title/${title}`;
+    return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
+  }
+
+  // Get movie lists
+  getMovieLists(): Observable<any> {
+    const url = `${this.BaseUrl}/titles/utils/lists`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
+  // Get title types
+  getTitleTypes(): Observable<any> {
+    const url = `${this.BaseUrl}/titles/utils/titleTypes`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
 
   customizeUrl(url: string, options: TitlesOPtions): string {
     const _OptionsArr = Object.entries(options)
@@ -121,7 +249,6 @@ export interface Response {
 export interface TitlesOPtions {
   genre?:
     | 'Action'
-    | 'Adult'
     | 'Adventure'
     | 'Animation'
     | 'Biography'

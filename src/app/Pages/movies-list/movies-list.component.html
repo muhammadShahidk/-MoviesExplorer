@@ -1,22 +1,27 @@
+<app-search-movies></app-search-movies>
 <app-filters (FilteredOptions)="filteredOptions($event)"></app-filters>
 <!-- Button trigger modal -->
 
-  
-  <!-- Modal -->
- <app-popup-model [Id]="'ex'" 
- [Title]="SelectedMove?SelectedMove.originalTitleText.text:''" [saveBtnColor]="'success'">
-  <app-move-details [Movie]="SelectedMove"></app-move-details>
- </app-popup-model>
+
+<!-- Modal -->
+<app-popup-model [Id]="'ex'" [Title]="SelectedMove?SelectedMove.originalTitleText.text:''" [saveBtnColor]="'success'">
+    <app-move-details [Movie]="SelectedMove"></app-move-details>
+</app-popup-model>
+
+<!-- Catagories  -->
+
+<h1 *ngFor="let genre of sportedGenres" class="display-5">{{genre}}</h1>
+
+
+
+
 <div *ngIf="MoviesTitles" class="d-flex align-items-center flex-wrap gap-2">
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <div class="col-6 col-md-3 " *ngFor="let Movie of MoviesTitles">
 
-                <app-move
-                data-bs-toggle="modal" data-bs-target="#ex"
-                 class="AppMove" 
-                 [movie]="Movie"
-                 (click)="ShowDetails(Movie)"></app-move>
+                <app-move data-bs-toggle="modal" data-bs-target="#ex" class="AppMove" [movie]="Movie"
+                    (click)="ShowDetails(Movie)"></app-move>
 
             </div>
         </div>

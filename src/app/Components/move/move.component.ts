@@ -8,6 +8,7 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-move',
@@ -79,6 +80,7 @@ export class MoveComponent {
   imageLoadedFlag: boolean = false;
 
   imageLoaded(): void {
+    // console.log(JSON.stringify(this.movie));
     console.log('image loaded');
     this.imageLoadedFlag = true;
   }

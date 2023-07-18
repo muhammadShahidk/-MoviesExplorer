@@ -1,0 +1,15 @@
+<div  class="card move h-100">
+    <img [className]="!imageLoadedFlag? 'opacity-0':''" 
+        [offset]="100" 
+        [lazyLoad]="url?url:''" 
+        (load)="imageLoaded()"
+        class="img-thumbnail"
+        [ngClass]="Classes"
+        class="h-100">
+    <!-- checking if the image is loaded -->
+    <div *ngIf="!imageLoadedFlag">
+        <p class="card-text placeholder-glow rounded rounded-2">
+            <span class="myOverlay placeholder col-7"></span>
+        </p>
+    </div>
+</div>

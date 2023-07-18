@@ -1,12 +1,13 @@
-
 <!-- As a link -->
-<nav class="navbar bg-light shadow">
+<nav class="navbar bg-black text-white  shadow">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Movies Explorer</a>
-        <div class="searchBar">
-            <input class="rounded p-2 border w-100" type="text" placeholder="Search">
+
+        <div class="d-flex gap-2 align-items-center">
+            <div (click)="onToggleSidenav()" class="text-uppercase" style="cursor: pointer;">toggle</div>
+            <a class="navbar-brand text-white" href="#">Movies Explorer</a>
         </div>
-        <div class="Login">
+        <div class="Login d-flex gap-2 align-items-center">
+            <input class="rounded p-2 border w-100" type="text" placeholder="Search">
             <button class="btn btn-success rounded-5">Login</button>
         </div>
     </div>

@@ -1,19 +1,19 @@
-<app-header></app-header>
+<!-- create a template variable to hold the bolion  vleue -->
+<input type="hidden" #isSidbarOpend>
+<app-header (sidenavToggle)="isSidbarOpend.value = $event" ></app-header>
+{{isSidbarOpend.value}}
+<app-sidebar [ngClass]="isSidbarOpend.value == 'true'?'d-block':'d-none'" class="sidebar shadow bg-body-tertiary z-3" style="left:0 ;" (selectedOption)="isSidbarOpend.value= sideBarResponse($event)"></app-sidebar>
+<div (click)="isSidbarOpend.value = 'false'" [ngClass]="isSidbarOpend.value == 'true'?'d-block':'d-none'" class="sidebar-backdrop"></div>
 <div class="container">
   <div class="row">
-    <div class="col-2">
-      
-      <app-sidebar class="shadow bg-body-tertiary" (selectedOption)="sideBarResponse($event)"></app-sidebar>
-    </div>
-    <div class="col-10">
-
+  
       <div class="container bg-body">
         <!-- Heading -->
-        <h1>{{selectedCatagory}} Top 2022 Movies</h1>
+        <h1>{{selectedCatagory}} Top  Movies</h1>
         <!-- Movies List -->
         <app-movies-list [genre]="selectedCatagory"></app-movies-list>
       </div>
-    </div>
+   
   </div>
 </div>
 <!-- create a button and on click call getData() -->

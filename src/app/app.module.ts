@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MoveDetailsComponent } from './Components/move-details/move-details.component';
 import { PopupModelComponent } from './Components/popup-model/popup-model.component';
 import { AddModalPropertiesDirective } from './Directives/add-modal-properties.directive';
+import { LazyLoadImagComponent } from './Components/lazy-load-imag/lazy-load-imag.component';
+import { SearchMoviesComponent } from './Components/search-movies/search-movies.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AddModalPropertiesDirective } from './Directives/add-modal-properties.d
     FiltersComponent,
     MoveDetailsComponent,
     PopupModelComponent,
-    AddModalPropertiesDirective
+    AddModalPropertiesDirective,
+    LazyLoadImagComponent,
+    SearchMoviesComponent
   ],
   imports: [
     BrowserModule,
