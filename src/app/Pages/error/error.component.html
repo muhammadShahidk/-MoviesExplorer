@@ -1,0 +1,19 @@
+<h1 class="display-3">Calculator</h1>
+<!-- variable -->
+<input type="hidden" #cal>
+
+<div class="cal d-flex flex-column justify-content-center">
+  <input class="form-control" [ngModel] ="key" type="text" placeholder="Enter Value" />
+  <button (click)="key = ''" type="button" class="btn btn-outline-primary">reset</button>
+  
+  <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
+    <span
+      *ngFor="let b of [1, 2, 3, 4, 5, 6, 7, 8, 9,'+','-']"
+      class="btn btn-outline-secondary  p-2 rounded-circle"
+      (click)="Value($event)"
+      >{{ b }}</span
+      >
+    </div>
+    {{cal.value|json}}
+</div>
+

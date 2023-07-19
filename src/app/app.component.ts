@@ -9,8 +9,10 @@ import { MoviesDbService } from './Services/movies-db.service';
 })
 export class AppComponent {
   title = 'MovesExplorer';
+  SelectedGenre!:string
   MoviesCatagories!:[];
   selectedCatagory!:string;
+  isSidbarOpend :boolean = false;
 
   constructor(private Db: MoviesDbService) { }
 
@@ -29,6 +31,6 @@ export class AppComponent {
     console.log(event);
     
     this.selectedCatagory = event;
-    return 'false';
+    return false;
   }
 }

@@ -17,6 +17,7 @@ import { PopupModelComponent } from './Components/popup-model/popup-model.compon
 import { AddModalPropertiesDirective } from './Directives/add-modal-properties.directive';
 import { LazyLoadImagComponent } from './Components/lazy-load-imag/lazy-load-imag.component';
 import { SearchMoviesComponent } from './Components/search-movies/search-movies.component';
+import { ErrorComponent } from './Pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearchMoviesComponent } from './Components/search-movies/search-movies.
     PopupModelComponent,
     AddModalPropertiesDirective,
     LazyLoadImagComponent,
-    SearchMoviesComponent
+    SearchMoviesComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
