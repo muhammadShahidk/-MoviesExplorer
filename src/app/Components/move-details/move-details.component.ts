@@ -14,13 +14,14 @@ RandomMovies!:MoveTitleDetails[];
 
 ngOnChanges(changes: SimpleChanges): void {
   if (changes['RandomMovies']) {
+    debugger
   this.get();
 }
 }
 
-ngOnInit(): void {
-  this.get();
-}
+// ngOnInit(): void {
+//   this.get();
+// }
 get(){
   this.db.getMoviesTitlesWitSizeLimit({ limit:50},1).subscribe((v)=>{
     this.RandomMovies = v.results;

@@ -64,31 +64,21 @@ export class MoviesDbService {
   }
 
   getMoviesTitlesWitSizeLimit(options: TitlesOPtions, maxBannerSizeMb?: number): Observable<MoviesTitlesPage> {
-    const url = `${this.BaseUrl}/titles`;
-    const customizedUrl = this.customizeUrl(url, options);
+    const customizedUrl = this.customizeUrl(`${this.BaseUrl}/titles`, options);
     
     return this.http.get<MoviesTitlesPage>(customizedUrl, { headers: this.headers }).pipe(
       map((movies: MoviesTitlesPage) => {
         if (maxBannerSizeMb) {
           movies.results = movies.results.filter((movie: MoveTitleDetails) => {
-            //check if width and height are not null
-            if (!movie.primaryImage?.width || !movie.primaryImage?.height) {
-              return false;
-            }
-            else{
-              const bannerSizeMb = movie.primaryImage.width * movie.primaryImage.height * 0.000001;
-              console.log("bannerSizeMb" + bannerSizeMb);
-              return bannerSizeMb <= maxBannerSizeMb;
-
-            }
-            
+            const bannerSizeMb = movie.primaryImage?.width * movie.primaryImage?.height * 0.000001;
+            return bannerSizeMb && bannerSizeMb <= maxBannerSizeMb;
           });
         }
         return movies;
       })
     );
   }
-  
+
   // ...
 
   getLocalMoviesTitles(): Observable<MoviesTitlesPage> {

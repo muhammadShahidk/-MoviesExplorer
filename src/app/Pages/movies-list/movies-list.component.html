@@ -28,9 +28,9 @@
 <!-- <h1 *ngFor="let genre of sportedGenres" class="display-5">{{ genre }}</h1> -->
 
 <!-- Showing movies in list -->
-<div *ngIf="MoviesTitles">
+<div *ngIf="Movies">
   <div class="row">
-    <div class="col-6 col-md-3" *ngFor="let Movie of MoviesTitles">
+    <div class="col-6 col-md-3" *ngFor="let Movie of Movies">
       <app-move
         data-bs-toggle="modal"
         data-bs-target="#ex"
@@ -42,48 +42,19 @@
   </div>
 </div>
 
+<div class="d-flex align-items-center justify-content-evenly">
+  <button type="button" (click)="nextPage()" class="btn btn-outline-primary">{{Page.page}}  next page {{nextp}}</button>
+  <input type="number" class="form-control " placeholder="P:NO"   />
+  <button type="button" (click)="privousPage()" class="btn btn-outline-primary">{{Page.page}}  Previous page </button>
+</div>
+
+
+<!-- {{ MoviesTitles | json }} -->
+{{ Page | json }}
 <!-- netFlix way -->
-<h1>netFlix</h1>
-<style>
-  .catagory::-webkit-scrollbar{
-    background-color: gray;
-    height: 5px;
-    border-radius: 2px;
-    
-    /* display: none; */
-
-  }
-  .catagory::-webkit-scrollbar-thumb{
-    height: 5px;
-    border-radius: 3px;
-    background-color: rgb(32, 21, 21);
-  }
-  
-</style>
-<div class="catagory overflow-x-scroll d-flex gap-2" >
-  h
-  <div class=" border"  *ngFor="let mo of [1,24,3,53,53,3,53,53,53,53,2,2,34]">
-    <img class="" style="width: 170px;" src="../../../assets/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="">
-  </div>
-</div>
-
-<h1>ok</h1>
-<div class="catagory overflow-x-scroll d-flex gap-2" >
-  h
-  <div class=" border"  *ngFor="let mo of [1,24,3,53,53,3,53,53,53,53,2,2,34]">
-    <img class="" style="width: 170px;" src="../../../assets/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="">
-  </div>
-</div>
-<h1>nic</h1>
-<div class="catagory overflow-x-scroll d-flex gap-2" >
-  h
-  <div class=" border"  *ngFor="let mo of [1,24,3,53,53,3,53,53,53,53,2,2,34]">
-    <img class="" style="width: 170px;" src="../../../assets/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="">
-  </div>
-</div>
 
 <!-- no Movies message  -->
-<div *ngIf="MoviesTitles?.length == 0 || !MoviesTitles">
+<div *ngIf="Movies?.length == 0 || !Movies">
   <!-- display in bootstrap alert -->
   <div class="alert alert-danger" role="alert">
     There are no movies to display

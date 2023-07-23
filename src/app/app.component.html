@@ -19,9 +19,13 @@
 <div class="container">
   <div class="row">
     <a routerLink="/error">error</a>
-    <router-outlet></router-outlet>
+    <div *ngIf="SelectedGenre">
+      <app-movies-list [genre]="SelectedGenre"></app-movies-list>
+    </div>
+    <div *ngIf="!SelectedGenre">
+      <router-outlet></router-outlet>
+    </div>
     <!-- Movies List -->
-    <!-- <app-movies-list [genre]="SelectedGenre"></app-movies-list> -->
   </div>
 </div>
 <!-- create a button and on click call getData() -->
