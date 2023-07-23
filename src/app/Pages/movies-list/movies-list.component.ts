@@ -12,7 +12,7 @@ export class MoviesListComponent {
   constructor(private Moves:MoviesDbService) { }
   @Input() genre!:string;
   // Page!:;
-  MoviesTitles!:MoveTitleDetails[];
+  MoviesTitles!:MoveTitleDetails[]
   sportedGenres = this.Moves.sportedGenres;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -37,7 +37,7 @@ export class MoviesListComponent {
 
     //  this.Moves.getLocalMoviesTitles().subscribe( r=>this.MoviesTitles = r.results.filter((x)=>x.primaryImage != null));
 
-    //  const localMoviesTitles = localStorage.getItem('MoviesTitles');
+     const localMoviesTitles = localStorage.getItem('MoviesTitles');
     // this.MoviesTitles = JSON.parse(localMoviesTitles);
     //  const moviesTitles: MoviesTitlesPage = JSON.parse(localMoviesTitles?localMoviesTitles:'');
     //   this.MoviesTitles = moviesTitles.results.filter((x)=>x.primaryImage != null);

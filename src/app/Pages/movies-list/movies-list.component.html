@@ -1,37 +1,91 @@
-<app-search-movies></app-search-movies>
-<app-filters (FilteredOptions)="filteredOptions($event)"></app-filters>
-<!-- Button trigger modal -->
+<!-- search bar + filters -->
+<div class="d-flex justify-content-between align-items-center mt-2">
+  <!-- movies search bar -->
+  <app-search-movies></app-search-movies>
+  <!-- filters btn -->
+  <span class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sm"
+    >filters</span
+  >
+</div>
 
+<h1 class="display-5">{{ genre }}</h1>
+<!-- filters in Popup -->
+<app-popup-model [Id]="'sm'">
+  <!-- filters -->
+  <app-filters (FilteredOptions)="filteredOptions($event)"></app-filters>
+</app-popup-model>
 
-<!-- Modal -->
-<app-popup-model [Id]="'ex'" [Title]="SelectedMove?SelectedMove.originalTitleText.text:''" [saveBtnColor]="'success'">
-    <app-move-details [Movie]="SelectedMove"></app-move-details>
+<!-- Movie popup -->
+<app-popup-model
+  [Id]="'ex'"
+  [Title]="SelectedMove ? SelectedMove.originalTitleText.text : ''"
+  [saveBtnColor]="'success'"
+>
+  <app-move-details [Movie]="SelectedMove"></app-move-details>
 </app-popup-model>
 
 <!-- Catagories  -->
+<!-- <h1 *ngFor="let genre of sportedGenres" class="display-5">{{ genre }}</h1> -->
 
-<h1 *ngFor="let genre of sportedGenres" class="display-5">{{genre}}</h1>
-
-
-
-
-<div *ngIf="MoviesTitles" class="d-flex align-items-center flex-wrap gap-2">
-    <div class="container ">
-        <div class="row">
-            <div class="col-6 col-md-3 " *ngFor="let Movie of MoviesTitles">
-
-                <app-move data-bs-toggle="modal" data-bs-target="#ex" class="AppMove" [movie]="Movie"
-                    (click)="ShowDetails(Movie)"></app-move>
-
-            </div>
-        </div>
+<!-- Showing movies in list -->
+<div *ngIf="MoviesTitles">
+  <div class="row">
+    <div class="col-6 col-md-3" *ngFor="let Movie of MoviesTitles">
+      <app-move
+        data-bs-toggle="modal"
+        data-bs-target="#ex"
+        class="AppMove"
+        [movie]="Movie"
+        (click)="ShowDetails(Movie)"
+      ></app-move>
     </div>
+  </div>
+</div>
 
+<!-- netFlix way -->
+<h1>netFlix</h1>
+<style>
+  .catagory::-webkit-scrollbar{
+    background-color: gray;
+    height: 5px;
+    border-radius: 2px;
+    
+    /* display: none; */
 
-    <div *ngIf="MoviesTitles.length == 0">
-        <!-- display in bootstrap alert -->
-        <div class="alert alert-danger" role="alert">
-            There are no movies to display
-        </div>
-    </div>
+  }
+  .catagory::-webkit-scrollbar-thumb{
+    height: 5px;
+    border-radius: 3px;
+    background-color: rgb(32, 21, 21);
+  }
+  
+</style>
+<div class="catagory overflow-x-scroll d-flex gap-2" >
+  h
+  <div class=" border"  *ngFor="let mo of [1,24,3,53,53,3,53,53,53,53,2,2,34]">
+    <img class="" style="width: 170px;" src="../../../assets/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="">
+  </div>
+</div>
+
+<h1>ok</h1>
+<div class="catagory overflow-x-scroll d-flex gap-2" >
+  h
+  <div class=" border"  *ngFor="let mo of [1,24,3,53,53,3,53,53,53,53,2,2,34]">
+    <img class="" style="width: 170px;" src="../../../assets/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="">
+  </div>
+</div>
+<h1>nic</h1>
+<div class="catagory overflow-x-scroll d-flex gap-2" >
+  h
+  <div class=" border"  *ngFor="let mo of [1,24,3,53,53,3,53,53,53,53,2,2,34]">
+    <img class="" style="width: 170px;" src="../../../assets/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="">
+  </div>
+</div>
+
+<!-- no Movies message  -->
+<div *ngIf="MoviesTitles?.length == 0 || !MoviesTitles">
+  <!-- display in bootstrap alert -->
+  <div class="alert alert-danger" role="alert">
+    There are no movies to display
+  </div>
 </div>

@@ -1,19 +1,27 @@
 <!-- create a template variable to hold the bolion  vleue -->
-<input type="hidden" #isSidbarOpend>
-<app-header (sidenavToggle)="isSidbarOpend.value = $event" ></app-header>
-{{isSidbarOpend.value}}
-<app-sidebar [ngClass]="isSidbarOpend.value == 'true'?'d-block':'d-none'" class="sidebar shadow bg-body-tertiary z-3" style="left:0 ;" (selectedOption)="isSidbarOpend.value= sideBarResponse($event)"></app-sidebar>
-<div (click)="isSidbarOpend.value = 'false'" [ngClass]="isSidbarOpend.value == 'true'?'d-block':'d-none'" class="sidebar-backdrop"></div>
+<app-header (sidenavToggle)="isSidbarOpend = $event"
+[toggle]="isSidbarOpend"
+></app-header>
+
+<!-- sidebar -->
+<app-sidebar
+  [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'"
+  class="sidebar shadow bg-body-tertiary"
+  style="left: 0; z-index: 5"
+  (selectedOption)="isSidbarOpend = sideBarResponse($event) ;SelectedGenre = $event"
+></app-sidebar>
+<!-- backdrop -->
+<div
+  (click)="isSidbarOpend = false;"
+  [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'"
+  class="sidebar-backdrop"
+></div>
 <div class="container">
   <div class="row">
-  
-      <div class="container bg-body">
-        <!-- Heading -->
-        <h1>{{selectedCatagory}} Top  Movies</h1>
-        <!-- Movies List -->
-        <app-movies-list [genre]="selectedCatagory"></app-movies-list>
-      </div>
-   
+    <a routerLink="/error">error</a>
+    <router-outlet></router-outlet>
+    <!-- Movies List -->
+    <!-- <app-movies-list [genre]="SelectedGenre"></app-movies-list> -->
   </div>
 </div>
 <!-- create a button and on click call getData() -->

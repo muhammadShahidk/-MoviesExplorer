@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() public sidenavToggle = new EventEmitter();
-  toggle: boolean = false;
+  @Input() toggle: boolean = false;
   //alert that the sidenav is open or closed 
   onToggleSidenav() {
     this.toggle = !this.toggle;
