@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FiltersService } from 'src/app/Services/filters.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,10 +38,14 @@ sibarOptions = [
 
 ]
 
+constructor(private filterSevice:FiltersService){}
+
 //create input to recive the open or close event
 @Output() selectedOption = new EventEmitter<string>();
 HandleClick(event:MouseEvent){
   const target = event.target as HTMLElement;
+  this.filterSevice.updateGenere(target.textContent ?? '');
+  console.log("sidebar options add to sahred" + this.filterSevice.sidbarGenere);
   this.selectedOption.emit(target.textContent ?? '');
 }
 
