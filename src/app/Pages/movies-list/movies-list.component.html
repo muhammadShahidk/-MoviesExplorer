@@ -4,11 +4,16 @@
   <app-search-movies></app-search-movies>
   <!-- filters btn -->
   <span class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sm"
-    >filters</span
+    >
+    <i class="bi bi-funnel"></i>
+    filters</span
   >
 </div>
 
-<h1 class="display-5">{{ genre }}</h1>
+<button type="button" (click)="checkMoviesData()" class="btn btn-outline-primary">chehk arat</button>
+
+
+<h1 class="display-5">{{ genre?genre:"Top Movies" }}</h1>
 <!-- filters in Popup -->
 <app-popup-model [Id]="'sm'">
   <!-- filters -->
@@ -24,13 +29,12 @@
   <app-move-details [Movie]="SelectedMove"></app-move-details>
 </app-popup-model>
 
-<!-- Catagories  -->
-<!-- <h1 *ngFor="let genre of sportedGenres" class="display-5">{{ genre }}</h1> -->
 
-<!-- Showing movies in list -->
-<div *ngIf="Movies">
+<!-- Search results -->
+<div>
+  <h1 *ngIf="moviesData.Movies.length > 0">search results</h1>
   <div class="row">
-    <div class="col-6 col-md-3" *ngFor="let Movie of Movies">
+    <div class="col-6 col-md-3" *ngFor="let Movie of (moviesData.Movies.length > 0 ? moviesData.Movies : Movies)">
       <app-move
         data-bs-toggle="modal"
         data-bs-target="#ex"
@@ -42,16 +46,37 @@
   </div>
 </div>
 
-<div class="d-flex align-items-center justify-content-evenly">
-  <button type="button" (click)="nextPage()" class="btn btn-outline-primary">{{Page.page}}  next page {{nextp}}</button>
-  <input type="number" class="form-control " placeholder="P:NO"   />
-  <button type="button" (click)="privousPage()" class="btn btn-outline-primary">{{Page.page}}  Previous page </button>
-</div>
+
+<!-- privous and next page btns  -->
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li class="page-item">
+        <a 
+          href="#"
+          class="page-link"
+          (click)="privousPage()"
+          >
+          <i class="bi bi-arrow-left"></i> 
+            Previous
+          </a>
+        </li> 
+        <span class="mx-2">Page  {{Page.page }}</span>
+      <li class="page-item">
+        <a class="page-link" 
+            href="#"
+            (click)="nextPage()" 
+            >
+              Next
+              <i class="bi bi-arrow-right"></i> 
+
+            </a>
+      </li>
+    </ul>
+  </nav>
 
 
-<!-- {{ MoviesTitles | json }} -->
-{{ Page | json }}
-<!-- netFlix way -->
+
 
 <!-- no Movies message  -->
 <div *ngIf="Movies?.length == 0 || !Movies">

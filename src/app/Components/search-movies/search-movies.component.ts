@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MoveTitleDetails, MoviesTitlesPage } from 'src/app/Models/IModels';
+import { GetDataFromApiService } from 'src/app/Services/get-data-from-api.service';
 import { MoviesDbService } from 'src/app/Services/movies-db.service';
 
 @Component({
@@ -8,9 +9,9 @@ import { MoviesDbService } from 'src/app/Services/movies-db.service';
   styleUrls: ['./search-movies.component.css']
 })
 export class SearchMoviesComponent {
-  searchResults: MoveTitleDetails[] = [];
+  searchResults!: MoveTitleDetails[];
 
-  constructor(private moviesDbService: MoviesDbService) { }
+  constructor(private moviesDbService: MoviesDbService,private moviesDAta:GetDataFromApiService) { }
 
   searchMovies(event: Event): void {
     let keyword = (event.target as HTMLInputElement).value;
@@ -18,7 +19,10 @@ export class SearchMoviesComponent {
     if (keyword.trim() !== '') {
       this.moviesDbService.searchMoviesByKeyword(keyword).subscribe(
         (results) => {
-          this.searchResults = results.results;
+          // this.searchResults = results.results;
+          // this.searchResults = results.results;
+          this.moviesDAta.Movies = results.results;
+          
           console.log('searchResults:', results);
         },
         (error) => {

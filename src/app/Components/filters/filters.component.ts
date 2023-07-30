@@ -8,7 +8,7 @@ import { TitlesOPtions } from '../../Services/movies-db.service';
 })
 export class FiltersComponent {
   @Output() FilteredOptions =new EventEmitter<TitlesOPtions>();;
-  Options:TitlesOPtions= {};
+  Options:TitlesOPtions= {genre:'most_pop_movies'};
   
   YearsFilter: number[] = [2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010];
   titleTypeFilter: string[] = [

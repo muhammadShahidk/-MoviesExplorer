@@ -4,6 +4,7 @@ import {
   TitlesOPtions,
 } from '../../Services/movies-db.service';
 import { MoveTitleDetails, MoviesTitlesPage } from '../../Models/IModels';
+import { GetDataFromApiService } from 'src/app/Services/get-data-from-api.service';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -12,13 +13,21 @@ import { MoveTitleDetails, MoviesTitlesPage } from '../../Models/IModels';
 export class MoviesListComponent {
   // get this id exampleModal element ref
 
-  constructor(private Moves: MoviesDbService) {}
+  constructor(private Moves: MoviesDbService,public moviesData:GetDataFromApiService) {
+    this.SearcdMovies = this.moviesData.Movies;
+    console.log(moviesData.Movies);
+  }
+
+  checkMoviesData =() => console.log(this.moviesData.Movies);
+
   @Input() genre!: string;
   // Page!:;
+  SearcdMovies!: MoveTitleDetails[];
   Movies!: MoveTitleDetails[];
+
   sportedGenres = this.Moves.sportedGenres;
-  Page: page = { page: 0, next: '', entries: 0 };
-  nextp: number = 0;
+  Page: page = { page: 1, next: '', entries: 0 };
+  nextp: number = 1;
 
   SelectedMove!: MoveTitleDetails;
   filters: TitlesOPtions = { limit: 10 };

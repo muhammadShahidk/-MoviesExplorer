@@ -3,12 +3,13 @@
     <div class="container-fluid">
 
         <div class="d-flex gap-2 align-items-center">
-            <div (click)="onToggleSidenav()" class="text-uppercase" style="cursor: pointer;">toggle</div>
+            <div (click)="onToggleSidenav()" class="text-uppercase" style="cursor: pointer;">
+                <i class="bi bi-list" style="font-size: 30px;"></i>
+            </div>
             <a class="navbar-brand text-white" href="#">Movies Explorer</a>
         </div>
         <div class="Login d-flex gap-2 align-items-center">
-            <input class="rounded p-2 border w-100" type="text" placeholder="Search">
-            <button class="btn btn-success rounded-5">Login</button>
+            <app-search-movies></app-search-movies>
         </div>
     </div>
 </nav>

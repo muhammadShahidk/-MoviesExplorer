@@ -1,8 +1,10 @@
-<input type="text" (change)="searchMovies($event)" placeholder="Search movies...">
-<ul>
-  <li *ngFor="let result of searchResults">
-
-   <img class="col-4 rounded-circle" height="50px" [src]="result?result?.primaryImage?.url:''" alt=""/>  
-     {{result?.titleText?.text}}
-  </li>
-</ul>
+<input class="rounded p-2 border w-100" placeholder="Search Movies" type="text" (change)="searchMovies($event)"
+  placeholder="Search movies...">
+<div class="position-absulotue">
+  <ul>
+    <li *ngFor="let result of searchResults">
+  
+      <app-move [movie]="result"></app-move>
+    </li>
+  </ul>
+</div>
