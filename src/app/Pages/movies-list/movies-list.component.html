@@ -4,20 +4,15 @@
   <app-search-movies></app-search-movies>
   <!-- filters btn -->
   <span class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sm"
-    >
-    <i class="bi bi-funnel"></i>
-    filters</span
+    >filters</span
   >
 </div>
 
-<button type="button" (click)="checkMoviesData()" class="btn btn-outline-primary">chehk arat</button>
-
-
-<h1 class="display-5">{{ genre?genre:"Top Movies" }}</h1>
+<h1 class="display-5">{{ genre}}</h1>
 <!-- filters in Popup -->
 <app-popup-model [Id]="'sm'">
   <!-- filters -->
-  <app-filters (FilteredOptions)="filteredOptions($event)"></app-filters>
+  <app-filters [Options]="filters" (FilteredOptions)="filteredOptions($event)"></app-filters>
 </app-popup-model>
 
 <!-- Movie popup -->
@@ -30,11 +25,10 @@
 </app-popup-model>
 
 
-<!-- Search results -->
-<div>
-  <h1 *ngIf="moviesData.Movies.length > 0">search results</h1>
+<!-- Showing movies in list -->
+<div *ngIf="Movies">
   <div class="row">
-    <div class="col-6 col-md-3" *ngFor="let Movie of (moviesData.Movies.length > 0 ? moviesData.Movies : Movies)">
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let Movie of Movies">
       <app-move
         data-bs-toggle="modal"
         data-bs-target="#ex"
@@ -46,35 +40,12 @@
   </div>
 </div>
 
+<!-- load more movides -->
 
-<!-- privous and next page btns  -->
+<div *ngIf="Page.next" class="d-flex align-items-center justify-content-center">
 
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end">
-      <li class="page-item">
-        <a 
-          href="#"
-          class="page-link"
-          (click)="privousPage()"
-          >
-          <i class="bi bi-arrow-left"></i> 
-            Previous
-          </a>
-        </li> 
-        <span class="mx-2">Page  {{Page.page }}</span>
-      <li class="page-item">
-        <a class="page-link" 
-            href="#"
-            (click)="nextPage()" 
-            >
-              Next
-              <i class="bi bi-arrow-right"></i> 
-
-            </a>
-      </li>
-    </ul>
-  </nav>
-
+  <button (click)="loadMore()" class="btn btn-outline-primary">Load More</button>
+</div>
 
 
 

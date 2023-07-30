@@ -4,7 +4,8 @@ import {
   TitlesOPtions,
 } from '../../Services/movies-db.service';
 import { MoveTitleDetails, MoviesTitlesPage } from '../../Models/IModels';
-import { GetDataFromApiService } from 'src/app/Services/get-data-from-api.service';
+import { FiltersService } from 'src/app/Services/filters.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -12,21 +13,32 @@ import { GetDataFromApiService } from 'src/app/Services/get-data-from-api.servic
 })
 export class MoviesListComponent {
   // get this id exampleModal element ref
+  private dataSubscription: Subscription;
 
-  constructor(private Moves: MoviesDbService,public moviesData:GetDataFromApiService) {
-    this.SearcdMovies = this.moviesData.Movies;
-    console.log(moviesData.Movies);
+  constructor(private Moves: MoviesDbService, public filterService:FiltersService) {
+    // console.log("data form sevice " + this.filterService.sidbarGenere);
+    // this.genere2 = this.filterService.sidbarGenere
+
+    //checking if the genra is changed form the sidebar or not 
+    this.dataSubscription = this.filterService.sidbarGenere$.subscribe((data) => {
+      this.genre = data;
+      
+      if (this.genre.length > 0) {
+        // reset the page
+        this.filters.page = '1';
+        this.filters.genre = this.genre;
+        this.updateMoviesTitles(this.filters);
+        console.log("genra changes")
+      }
+    });
   }
+  @Input() genre: string = "";
 
-  checkMoviesData =() => console.log(this.moviesData.Movies);
-
-  @Input() genre!: string;
+  
   // Page!:;
-  SearcdMovies!: MoveTitleDetails[];
   Movies!: MoveTitleDetails[];
-
   sportedGenres = this.Moves.sportedGenres;
-  Page: page = { page: 1, next: '', entries: 0 };
+  Page: page = { page: 0, next: '', entries: 0 };
   nextp: number = 1;
 
   SelectedMove!: MoveTitleDetails;
@@ -34,7 +46,8 @@ export class MoviesListComponent {
 
   updateMoviesTitles(
     TitlesOPtions: TitlesOPtions,
-    loadSmallSizeMovies: boolean = false
+    loadSmallSizeMovies: boolean = false,
+    appendToMovies:boolean = false
   ) {
     //method to load movies
     let method = loadSmallSizeMovies
@@ -49,7 +62,10 @@ export class MoviesListComponent {
         console.time('load-time');
     
         // Process the fetched data
-        this.Movies = v.results.filter((x) => x.primaryImage != null);
+        let append = appendToMovies
+          ? v.results.filter((x) => x.primaryImage != null).forEach(x => this.Movies.push(x))
+          : this.Movies = v.results.filter((x) => x.primaryImage != null);
+
         this.Page.entries = v.entries;
         this.Page.next = v.next;
         this.Page.page = v.page;
@@ -73,10 +89,16 @@ export class MoviesListComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['genre']) {
       console.log(changes['genre'].currentValue);
-
+      debugger
       this.filters.genre = this.genre;
-      this.updateMoviesTitles(this.filters, true);
+      this.updateMoviesTitles(this.filters);
     }
+  }
+
+  ngOnDestroy() {
+    // Don't forget to unsubscribe to prevent memory leaks.
+    debugger
+    this.dataSubscription.unsubscribe();
   }
 
   // when component starts
@@ -85,21 +107,17 @@ export class MoviesListComponent {
     this.updateMoviesTitles(this.filters);
   }
 
-  nextPage() {
-    console.log('fatching next page');
+
+  // loead more
+  loadMore(){
+    console.log('fatching data');
     this.nextp += 1;
     console.log(this.nextp);
     this.filters.page = this.nextp.toString();
-    this.updateMoviesTitles(this.filters,true);
+    this.updateMoviesTitles(this.filters,false,true);
   }
 
-  privousPage() {
-    console.log('fatching privous page');
-    this.nextp -= 1;
-    console.log(this.nextp);
-    this.filters.page = this.nextp.toString();
-    this.updateMoviesTitles(this.filters,true);
-  }
+
 
   filteredOptions(newOptions: TitlesOPtions) {
     console.log('new options seleted form sidbar ');
