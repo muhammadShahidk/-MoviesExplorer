@@ -2,9 +2,9 @@
   <!-- lazy image loading -->
   <!-- <img src="../../../assets/lagan.jpg" alt=""> -->
   <img [className]="!imageLoadedFlag? 'opacity-0':''" 
-        [offset]="100" @moveInLeft
+         @moveInLeft
       
-         [lazyLoad]="movie?movie.primaryImage.url:''"
+         [lazyLoad]="addResizedTextToImageUrl()"
         (load)="imageLoaded()"
           >
   <!-- checking if the image is loaded -->

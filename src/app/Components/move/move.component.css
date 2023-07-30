@@ -6,7 +6,6 @@
 }
 
 .card.move {
-    height: 366px;
     position: relative;
     border: none;
 }
@@ -21,10 +20,17 @@
 }
 
 .move img {
-    height: 260px;
+    height: 450px;
     /* min-height: 180px; */
     border-radius: 5px;
 }
+
+@media only screen and (max-width: 600px) {
+    .move img {
+        max-height: 450px;
+   
+    }
+  }
 
 /* .myOverlay {
     position: absolute;

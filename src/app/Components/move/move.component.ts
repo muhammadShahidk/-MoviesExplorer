@@ -79,6 +79,26 @@ export class MoveComponent {
 
   imageLoadedFlag: boolean = false;
 
+   addResizedTextToImageUrl(): string {
+    const resizedText = "_V1_FM_UX1000_";
+    let imageUrl = this.movie.primaryImage.url; // Assuming `this.movie.primaryImage.url` holds the original image URL.
+  
+    const filenameRegex = /\/([^/]+)(\.jpg)$/i;
+    const matches = imageUrl.match(filenameRegex);
+  
+    if (matches && matches.length === 3) {
+      const [, filenamePart, fileExtension] = matches;
+      if (!filenamePart.includes(resizedText)) {
+        const newImageUrl = imageUrl.replace(filenamePart + fileExtension, filenamePart + resizedText + fileExtension);
+        console.log(newImageUrl);
+        return newImageUrl;
+      }
+    }
+  
+    return imageUrl;
+  }
+  
+
   imageLoaded(): void {
     // console.log(JSON.stringify(this.movie));
     console.log('image loaded');
