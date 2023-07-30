@@ -1,31 +1,21 @@
 <!-- create a template variable to hold the bolion  vleue -->
-<app-header (sidenavToggle)="isSidbarOpend = $event"
-[toggle]="isSidbarOpend"
-></app-header>
+<app-header (sidenavToggle)="isSidbarOpend = $event" [toggle]="isSidbarOpend"></app-header>
 
 <!-- sidebar -->
-<app-sidebar
-  [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'"
-  class="sidebar shadow bg-body-tertiary"
+<app-sidebar [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'" class="sidebar shadow bg-body-tertiary"
   style="left: 0; z-index: 5"
-  (selectedOption)="isSidbarOpend = sideBarResponse($event) ;SelectedGenre = $event"
-></app-sidebar>
+  (selectedOption)="isSidbarOpend = sideBarResponse($event) ;SelectedGenre = $event"></app-sidebar>
 <!-- backdrop -->
-<div
-  (click)="isSidbarOpend = false;"
-  [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'"
-  class="sidebar-backdrop"
-></div>
+<div (click)="isSidbarOpend = false;" [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'" class="sidebar-backdrop">
+</div>
 <div class="container">
   <div class="row">
-    <div *ngIf="SelectedGenre">
-      <app-movies-list [genre]="SelectedGenre"></app-movies-list>
-    </div>
-    <div *ngIf="!SelectedGenre">
-      <router-outlet></router-outlet>
-    </div>
-    <!-- Movies List -->
+    <a routerLink="/error">error</a>
+    <!-- <app-movies-list [class]="SelectedGenre?d-block:d-none" [genre]="SelectedGenre"></app-movies-list> -->
+    <router-outlet></router-outlet>
   </div>
+  <!-- Movies List -->
 </div>
+
 <!-- create a button and on click call getData() -->
 <!-- <button  class="btn btn-primary">Get Data</button> -->
