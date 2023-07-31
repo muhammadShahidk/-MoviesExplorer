@@ -1,11 +1,18 @@
 <!-- search bar + filters -->
 <div class="d-flex justify-content-between align-items-center mt-2">
   <!-- movies search bar -->
-  <app-search-movies></app-search-movies>
+  <!-- <app-search-movies></app-search-movies> -->
   <!-- filters btn -->
   <span class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sm"
     >filters</span
   >
+</div>
+
+<div class="input-group mb-4 border rounded-pill p-1">
+  <input #search type="search" (change)="Search(search.value)" placeholder="What're you searching for?" aria-describedby="searchbtn" class="form-control bg-none border-0">
+  <div class="input-group-append border-0">
+    <button (click)="Search(search.value)" id="searchbtn" type="button" class="btn btn-link text-success"><i class="bi bi-search"></i></button>
+  </div>
 </div>
 
 <h1 class="display-5">{{ genre}}</h1>

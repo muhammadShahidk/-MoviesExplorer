@@ -202,8 +202,10 @@ export class MoviesDbService {
   }
 
   // Search movies by title
-  searchMoviesByTitle(title: string): Observable<MoviesTitlesPage> {
-    const url = `${this.BaseUrl}/titles/search/title/${title}`;
+  searchMoviesByTitle(title: string,options?:TitlesOPtions): Observable<MoviesTitlesPage> {
+    let url = `${this.BaseUrl}/titles/search/title/${title}`;
+    url = options?this.customizeUrl(url, options):url;
+
     return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
   }
 

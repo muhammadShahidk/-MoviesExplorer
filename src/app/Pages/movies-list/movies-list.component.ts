@@ -47,13 +47,20 @@ export class MoviesListComponent {
   updateMoviesTitles(
     TitlesOPtions: TitlesOPtions,
     loadSmallSizeMovies: boolean = false,
-    appendToMovies:boolean = false
+    appendToMovies:boolean = false,
+    isSearching:boolean = false,
+    searchkeywork:string = ""
   ) {
     //method to load movies
-    let method = loadSmallSizeMovies
+    let method;
+    if(!isSearching){
+     method = loadSmallSizeMovies
       ? this.Moves.getMoviesTitlesWitSizeLimit(TitlesOPtions,1)
       : this.Moves.getMoviesTitles(TitlesOPtions);
-
+    }
+    else{ 
+      method = this.Moves.searchMoviesByTitle(searchkeywork,TitlesOPtions);
+    }
     //subscribe to method
     method.subscribe({
       next: (v: MoviesTitlesPage) => {
@@ -78,9 +85,11 @@ export class MoviesListComponent {
       complete: () => {
         // End measuring time after processing the data
         console.log('movies loaded'); console.log(this.Movies);
+        
         console.timeEnd('load-time');
         console.groupEnd();
         console.log("completed");
+        return this.Movies;
       }
     });
     
@@ -117,6 +126,29 @@ export class MoviesListComponent {
     this.updateMoviesTitles(this.filters,false,true);
   }
 
+
+  //search
+  i = 0;
+  OldMovies!:MoveTitleDetails[] ;
+  OldFilters!:TitlesOPtions;
+  Search(search: string) {
+    // debugger
+   if(this.i == 0){this.OldMovies = this.Movies; this.OldFilters = this.filters;}
+    if(search){
+      console.log(search);
+      // this.filters.search = search;
+      this.filters = {};
+      this.filters.limit = 50;
+      this.updateMoviesTitles(this.filters,false,false,true,search);
+      this.i++;
+    }
+    else{
+      console.log("search is empty")
+      this.Movies = this.OldMovies?? this.Movies;
+      this.filters = this.OldFilters?? this.filters;
+      this.i = 0;
+    }
+  }
 
 
   filteredOptions(newOptions: TitlesOPtions) {

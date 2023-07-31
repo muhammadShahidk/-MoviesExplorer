@@ -13,6 +13,10 @@
         <h1>{{Movie?.titleText?.text}}</h1>
         <p>Lorem ipsum dolor sit am</p>
         <h3>Metadata</h3>
+
+        <p class=""><a  target="_blank" [href]="getIMDbURL()" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            >Explore on IMDB</a></p>
+
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{Movie?.titleText?.text}}</h5>
@@ -30,7 +34,6 @@
                 <!-- Add more movie details as needed -->
             </div>
         </div>
-
 
         <h3>Recommended Moves</h3>
         <div class="row g-2">
