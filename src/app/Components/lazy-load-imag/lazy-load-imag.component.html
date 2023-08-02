@@ -1,7 +1,7 @@
 <div  class="card move h-100">
     <img [className]="!imageLoadedFlag? 'opacity-0':''" 
         [offset]="100" 
-        [lazyLoad]="url?url:''" 
+        [lazyLoad]="addResizedTextToImageUrl()" 
         (load)="imageLoaded()"
         class="img-thumbnail"
         [ngClass]="Classes"

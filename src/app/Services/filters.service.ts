@@ -6,6 +6,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FiltersService {
    sidbarGenere:string = "";
+   modalMovieChanged:string = "";
+
+   private modalSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.modalMovieChanged);
+    modalMovieChanged$ = this.modalSubject.asObservable();
+
    private sharedDataSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.sidbarGenere);
    sidbarGenere$ = this.sharedDataSubject.asObservable();
 
@@ -13,5 +18,10 @@ export class FiltersService {
    updateGenere(up:string){
     this.sharedDataSubject.next(up);
    }
+
+    updateModalMovie(up:string){
+    this.modalSubject.next(up); 
+    }
+    
   constructor() { }
 }
