@@ -18,7 +18,6 @@ export class SearchMoviesComponent {
     console.log('keyword:', keyword);
 
     if (keyword !== '') {
-      debugger
       this.moviesDbService.searchMoviesByTitle(keyword).subscribe({
         next: (results) => {
           this.searchResults = results.results.filter((x) => x.primaryImage != null);

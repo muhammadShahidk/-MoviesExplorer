@@ -24,11 +24,12 @@
 
 <!-- Movie popup -->
 <app-popup-model
+ #myModal
   [Id]="'ex'"
   [Title]="SelectedMove ? SelectedMove.originalTitleText.text : ''"
   [saveBtnColor]="'success'"
 >
-  <app-move-details [Movie]="SelectedMove"></app-move-details>
+  <app-move-details (ShowMovies)="ScrollUP()" [Movie]="SelectedMove"></app-move-details>
 </app-popup-model>
 
 

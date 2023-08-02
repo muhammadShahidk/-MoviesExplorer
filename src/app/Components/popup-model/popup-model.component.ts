@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MoveTitleDetails } from 'src/app/Models/IModels';
 
 @Component({
@@ -11,6 +11,15 @@ export class PopupModelComponent {
   @Input() Id = '';
   @Input() Title = '';
   @Input() saveBtnColor = 'primary';
+
+  // add view child to get the modalContent
+  @ViewChild('modalContent') modalContent!: ElementRef;
+
+  ScrollUP(){
+    const modalElement: HTMLElement = this.modalContent.nativeElement;
+    modalElement.scrollTop = 0;
+  }
+
   // const myModal = new bootstrap.Modal(document.getElementById('myModal'), options)
   // // or
   // const myModalAlternative = new bootstrap.Modal('#myModal', options)

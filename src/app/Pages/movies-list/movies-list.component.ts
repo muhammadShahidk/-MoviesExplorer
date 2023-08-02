@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
 import {
   MoviesDbService,
   TitlesOPtions,
@@ -33,7 +33,8 @@ export class MoviesListComponent {
     });
   }
   @Input() genre: string = "";
-
+  //get the my modal element ref
+  @ViewChild("myModal") myModal!: ElementRef;
   
   // Page!:;
   Movies!: MoveTitleDetails[];
@@ -98,7 +99,6 @@ export class MoviesListComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['genre']) {
       console.log(changes['genre'].currentValue);
-      debugger
       this.filters.genre = this.genre;
       this.updateMoviesTitles(this.filters);
     }
@@ -106,7 +106,6 @@ export class MoviesListComponent {
 
   ngOnDestroy() {
     // Don't forget to unsubscribe to prevent memory leaks.
-    debugger
     this.dataSubscription.unsubscribe();
   }
 
@@ -126,6 +125,10 @@ export class MoviesListComponent {
     this.updateMoviesTitles(this.filters,false,true);
   }
 
+  ScrollUP(){
+    // debugger
+  }
+  
 
   //search
   i = 0;
