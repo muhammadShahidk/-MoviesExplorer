@@ -1,7 +1,10 @@
-<div  class="p-4 sidebar shadow">
+<div  class="p-4 sidebar shadow overflow-y-auto">
   <ul class="list-unstyled">
-    <li *ngFor="let option of sibarOptions">
-      <a (click)="HandleClick($event)" class="categoryLink" href="#">{{option}}</a>
-    </li>
+    <div  *ngFor="let option of sidebarOptions" (click)="HandleClick(option.name)" class="list-group-item liCatagory">
+      <span class="d-inline-flex align-items-center justify-content-center text-white rounded-circle m-1 me-2" style="background-color: #0082ca; width: 40px; height: 40px;">
+        <i [class]="option.icon"></i>
+      </span>
+      {{option.name}}
+    </div>
   </ul>
 </div>
