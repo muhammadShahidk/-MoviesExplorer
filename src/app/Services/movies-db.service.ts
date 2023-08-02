@@ -64,8 +64,9 @@ export class MoviesDbService {
   }
 
   getMoviesTitlesWitSizeLimit(options: TitlesOPtions, maxBannerSizeMb?: number): Observable<MoviesTitlesPage> {
-    const customizedUrl = this.customizeUrl(`${this.BaseUrl}/titles`, options);
-    
+    let customizedUrl = this.customizeUrl(`${this.BaseUrl}/titles`, options);
+    //adding img resize image attribute to url
+
     return this.http.get<MoviesTitlesPage>(customizedUrl, { headers: this.headers }).pipe(
       map((movies: MoviesTitlesPage) => {
         if (maxBannerSizeMb) {
@@ -78,6 +79,9 @@ export class MoviesDbService {
       })
     );
   }
+
+
+  //adding img resize to url 
 
   // ...
 
