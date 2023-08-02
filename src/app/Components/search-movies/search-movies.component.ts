@@ -14,21 +14,23 @@ export class SearchMoviesComponent {
   constructor(private moviesDbService: MoviesDbService,private moviesDAta:GetDataFromApiService) { }
 
   searchMovies(event: Event): void {
-    let keyword = (event.target as HTMLInputElement).value;
+    const keyword = (event.target as HTMLInputElement).value.trim();
     console.log('keyword:', keyword);
-    if (keyword.trim() !== '') {
-      this.moviesDbService.searchMoviesByKeyword(keyword).subscribe(
-        (results) => {
-          // this.searchResults = results.results;
-          // this.searchResults = results.results;
-          this.moviesDAta.Movies = results.results;
-          
-          console.log('searchResults:', results);
+
+    if (keyword !== '') {
+      debugger
+      this.moviesDbService.searchMoviesByTitle(keyword).subscribe({
+        next: (results) => {
+          this.searchResults = results.results.filter((x) => x.primaryImage != null);
+          console.log('searchResults:',this. searchResults);
         },
-        (error) => {
+        error: (error) => {
           console.log('Error occurred while searching movies:', error);
+        },
+        complete: () => {
+          console.info('complete');
         }
-      );
+      });
     } else {
       this.searchResults = [];
     }

@@ -9,7 +9,9 @@ import { MoviesDbService } from 'src/app/Services/movies-db.service';
 })
 export class MoveDetailsComponent {
   @Input() Movie?:MoveTitleDetails ;
+//getting the service
 constructor(private db:MoviesDbService) { }
+
 RandomMovies!:MoveTitleDetails[];
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -35,5 +37,10 @@ get(){
 ShowMove(m:MoveTitleDetails){
   this.Movie = m;
   console.log(this.Movie);
+}
+
+ getIMDbURL() {
+  const baseURL = 'https://www.imdb.com/title/';
+  return `${baseURL}${this.Movie?.id}/`;
 }
 }

@@ -90,7 +90,6 @@ export class MoveComponent {
       const [, filenamePart, fileExtension] = matches;
       if (!filenamePart.includes(resizedText)) {
         const newImageUrl = imageUrl.replace(filenamePart + fileExtension, filenamePart + resizedText + fileExtension);
-        console.log(newImageUrl);
         return newImageUrl;
       }
     }
@@ -101,7 +100,7 @@ export class MoveComponent {
 
   imageLoaded(): void {
     // console.log(JSON.stringify(this.movie));
-    console.log('image loaded');
+    // console.log('image loaded');
     this.imageLoadedFlag = true;
   }
   @Input() movie!: MoveTitleDetails;
