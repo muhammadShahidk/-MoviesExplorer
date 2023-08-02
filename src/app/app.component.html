@@ -1,8 +1,8 @@
 <!-- create a template variable to hold the bolion  vleue -->
-<app-header (sidenavToggle)="isSidbarOpend = $event" [toggle]="isSidbarOpend"></app-header>
+<app-header  (sidenavToggle)="isSidbarOpend = $event" [toggle]="isSidbarOpend"></app-header>
 
 <!-- sidebar -->
-<app-sidebar [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'" class="sidebar shadow bg-body-tertiary"
+<app-sidebar  [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'" class="sidebar shadow bg-body-tertiary overflow-x-scroll"
   style="left: 0; z-index: 5"
   (selectedOption)="isSidbarOpend = sideBarResponse($event) ;SelectedGenre = $event"></app-sidebar>
 <!-- backdrop -->
