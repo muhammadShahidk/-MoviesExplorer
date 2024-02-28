@@ -111,7 +111,10 @@ export class MoviesListComponent {
 
   // when component starts
   ngOnInit(): void {
-    this.filters = { genre: 'Action', year: 2022, list: 'most_pop_movies' };
+    const currentYear = new Date().getFullYear();
+    console.log('current year ' + currentYear);
+
+    this.filters = { genre: 'Action', year: currentYear,limit: 30};
     this.updateMoviesTitles(this.filters);
   }
 

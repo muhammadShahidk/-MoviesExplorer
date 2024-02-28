@@ -57,31 +57,41 @@ export class MoviesDbService {
   getMoviesTitles(options?: TitlesOPtions): Observable<MoviesTitlesPage> {
     this.url = `${this.BaseUrl}/titles`;
     //adding options to url
-    if (options) this.url = this.customizeUrl(this.url, options);
+    let updatedUrl = "";
+    if (options) updatedUrl = this.customizeUrl(this.url, options);
 
-    console.log('here is the new url' + this.url);
-    return this.http.get<MoviesTitlesPage>(this.url, { headers: this.headers });
+    console.log('here is the new url' + updatedUrl);
+    return this.http.get<MoviesTitlesPage>(updatedUrl, { headers: this.headers });
   }
 
-  getMoviesTitlesWitSizeLimit(options: TitlesOPtions, maxBannerSizeMb?: number): Observable<MoviesTitlesPage> {
+  getMoviesTitlesWitSizeLimit(
+    options: TitlesOPtions,
+    maxBannerSizeMb?: number
+  ): Observable<MoviesTitlesPage> {
     let customizedUrl = this.customizeUrl(`${this.BaseUrl}/titles`, options);
     //adding img resize image attribute to url
 
-    return this.http.get<MoviesTitlesPage>(customizedUrl, { headers: this.headers }).pipe(
-      map((movies: MoviesTitlesPage) => {
-        if (maxBannerSizeMb) {
-          movies.results = movies.results.filter((movie: MoveTitleDetails) => {
-            const bannerSizeMb = movie.primaryImage?.width * movie.primaryImage?.height * 0.000001;
-            return bannerSizeMb && bannerSizeMb <= maxBannerSizeMb;
-          });
-        }
-        return movies;
-      })
-    );
+    return this.http
+      .get<MoviesTitlesPage>(customizedUrl, { headers: this.headers })
+      .pipe(
+        map((movies: MoviesTitlesPage) => {
+          if (maxBannerSizeMb) {
+            movies.results = movies.results.filter(
+              (movie: MoveTitleDetails) => {
+                const bannerSizeMb =
+                  movie.primaryImage?.width *
+                  movie.primaryImage?.height *
+                  0.000001;
+                return bannerSizeMb && bannerSizeMb <= maxBannerSizeMb;
+              }
+            );
+          }
+          return movies;
+        })
+      );
   }
 
-
-  //adding img resize to url 
+  //adding img resize to url
 
   // ...
 
@@ -166,7 +176,7 @@ export class MoviesDbService {
   }
 
   // Get a random title
-  getRandomTitle(options:TitlesOPtions): Observable<MoviesTitlesPage> {
+  getRandomTitle(options: TitlesOPtions): Observable<MoviesTitlesPage> {
     let url = `${this.BaseUrl}/titles/random`;
     url = this.customizeUrl(url, options);
     return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
@@ -201,14 +211,17 @@ export class MoviesDbService {
   // Search movies by keyword
   searchMoviesByKeyword(keyword: string): Observable<MoviesTitlesPage> {
     const url = `${this.BaseUrl}/titles/search/keyword/${keyword}`;
-    console.log("url" + url);
+    console.log('url' + url);
     return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
   }
 
   // Search movies by title
-  searchMoviesByTitle(title: string,options?:TitlesOPtions): Observable<MoviesTitlesPage> {
+  searchMoviesByTitle(
+    title: string,
+    options?: TitlesOPtions
+  ): Observable<MoviesTitlesPage> {
     let url = `${this.BaseUrl}/titles/search/title/${title}`;
-    url = options?this.customizeUrl(url, options):url;
+    url = options ? this.customizeUrl(url, options) : url;
 
     return this.http.get<MoviesTitlesPage>(url, { headers: this.headers });
   }
@@ -229,11 +242,12 @@ export class MoviesDbService {
     const _OptionsArr = Object.entries(options)
       .filter(([key, value]) => value) // Filter out falsy values
       .map(([key, value]) => `${key}=${value}`); // Construct key-value pairs url parameters
-
+    console.log('url in costomize' + url);
+    console.log('falsy values' + _OptionsArr);
     if (_OptionsArr.length > 0) {
       url += '?' + _OptionsArr.join('&'); // Join key-value pairs with '&'
     }
-
+    console.log('url after  costomize' + url);
     return url;
   }
 }
