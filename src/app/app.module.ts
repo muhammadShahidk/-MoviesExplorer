@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, provideHttpClient, withInterceptors} from '@angular/common/http';
 import { MoveComponent } from './Components/move/move.component';
 import { MoviesListComponent } from './Pages/movies-list/movies-list.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -18,6 +18,7 @@ import { AddModalPropertiesDirective } from './Directives/add-modal-properties.d
 import { LazyLoadImagComponent } from './Components/lazy-load-imag/lazy-load-imag.component';
 import { SearchMoviesComponent } from './Components/search-movies/search-movies.component';
 import { ErrorComponent } from './Pages/error/error.component';
+import { authInterceptor } from './Intercepters/Logintercepter';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { ErrorComponent } from './Pages/error/error.component';
     LazyLoadImageModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptors([authInterceptor])),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
