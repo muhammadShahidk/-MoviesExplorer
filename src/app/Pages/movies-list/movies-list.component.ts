@@ -12,6 +12,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./movies-list.component.css'],
 })
 export class MoviesListComponent {
+UpdateTest() {
+
+  this.test += 3;
+  console.log("test updated");
+}
   // get this id exampleModal element ref
   private dataSubscription: Subscription;
 
@@ -35,7 +40,7 @@ export class MoviesListComponent {
   @Input() genre: string = "";
   //get the my modal element ref
   @ViewChild("myModal") myModal!: ElementRef;
-  
+  test=0;
   // Page!:;
   Movies!: MoveTitleDetails[];
   sportedGenres = this.Moves.sportedGenres;
