@@ -1,26 +1,27 @@
-<div class="card move col-12">
+<div class="card move col-12 d-flex" style="background-color: #000000;color: white;">
   <!-- lazy image loading -->
   <!-- <img src="../../../assets/lagan.jpg" alt=""> -->
-  <img [className]="!imageLoadedFlag? 'opacity-0':''" 
-         @moveInLeft
-      
-         [lazyLoad]="addResizedTextToImageUrl()"
-        (load)="imageLoaded()"
-          >
-  <!-- checking if the image is loaded -->
-  <div *ngIf="!imageLoadedFlag">
-    <p class="card-text placeholder-glow">
-      <span class="myOverlay placeholder col-7" ></span>
-    </p> 
+  <div class="imgContainer">
+    <img
+      [@fadeIn]="imageLoadedFlag ? 'loaded' : 'loading'"
+      [lazyLoad]="addResizedTextToImageUrl()"
+      (load)="imageLoaded()"
+    />
   </div>
+ 
   <!-- Movie Details -->
   <div class="card-body">
-    <h5 class="card-title">{{movie.originalTitleText.text}}</h5>
-    <p class="card-text">
-      releaseDate: {{movie.titleType.id}}
-      releaseYear: {{movie.releaseYear.year}}
-      Type: {{movie.titleType.text}}
-    </p>
+    <h5 class="card-title">{{ movie.originalTitleText.text }}</h5>
+    <div class="card-text">
+      <span class="badge text-bg-info m-1"
+        >ReleaseDate: {{ movie.titleType.id }}</span
+      >
+      <span class="badge text-bg-info m-1"
+        >ReleaseYear: {{ movie.releaseYear.year }}</span
+      >
+      <span class="badge text-bg-info m-1"
+        >Type: {{ movie.titleType.text }}</span
+      >
+    </div>
   </div>
 </div>
-

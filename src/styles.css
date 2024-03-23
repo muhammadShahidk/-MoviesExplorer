@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    /* Define gradient colors */
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    /* Fallback color */
+    background-color: #1a1a1a;
+    /* Ensure gradient covers the whole page */
+    min-height: 100vh;
+    margin: 0;
+    /* Ensure text contrast with dark background */
+    color: #ffffff; 
+  }

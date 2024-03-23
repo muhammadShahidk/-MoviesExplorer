@@ -1,5 +1,17 @@
 .liCatagory:hover {
-    background-color: #e1e0e0;
+    background: linear-gradient(to bottom, #000000, #111111, #222222);
+    color: white; /* Adjust the text color to white */
     cursor: pointer;
     border-radius: 21px;
 }
+
+/* .sidebar{
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #000000, #111111, #222222);
+ 
+    position: fixed;
+    top: 0;
+    left: -300px;
+    transition: left 0.3s ease;
+} */
