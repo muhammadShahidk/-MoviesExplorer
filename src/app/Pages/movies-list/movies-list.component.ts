@@ -18,12 +18,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./movies-list.component.css'],
 })
 export class MoviesListComponent {
-  test: number = 0;
-UpdateTest() {
 
-  this.test += 3;
-  console.log("test updated");
-}
   // get this id exampleModal element ref
   private dataSubscription: Subscription;
 
