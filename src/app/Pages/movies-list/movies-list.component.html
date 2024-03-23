@@ -12,7 +12,6 @@
 </div>
 
 
-
 <h1 class="display-5">{{ genre}}</h1>
 <!-- filters in Popup -->
 <app-popup-model [Id]="'sm'">
@@ -46,6 +45,8 @@
   </div>
 </div>
 
+
+
 <!-- load more movides -->
 
 <div *ngIf="Page.next" class="d-flex align-items-center justify-content-center">
@@ -62,3 +63,10 @@
     There are no movies to display
   </div>
 </div>
+
+<button (click)="UpdateTest()">update test</button>
+
+@if (test > 10) {
+  <h1>test is grater thkasdsdksadsajen 10</h1>
+}
+<h1>show ing {{test}}</h1>
