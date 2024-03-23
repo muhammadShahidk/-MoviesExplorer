@@ -1,11 +1,26 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MoviesDbService } from './Services/movies-db.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('sidebarAnimation', [
+      state('open', style({
+        transform: 'translateX(0)',
+      
+      })),
+      state('closed', style({
+        transform: 'translateX(-100%)'
+      })),
+      transition('open <=> closed', [
+        animate('0.3s')
+      ])
+    ])
+  ]
 })
 export class AppComponent {
   title = 'MovesExplorer';

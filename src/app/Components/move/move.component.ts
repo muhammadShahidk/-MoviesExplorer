@@ -15,47 +15,13 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './move.component.html',
   styleUrls: ['./move.component.css'],
   animations: [
-    trigger('openClose', [
-      // ...
-      state('open', style({
-        height: '200px',
-        opacity: 1,
-        backgroundColor: 'yellow'
-      })),
-      state('closed', style({
-        height: '100px',
-        opacity: 0.8,
-        backgroundColor: 'blue'
-      })),
-      transition('open => closed', [
-        animate('1s')
-      ]),
-      transition('closed => open', [
-        animate('0.5s')
-      ]),
-    ]),
-
-    //create anumation for the movie image to move from left to right when the movie is loaded
-    trigger('moveInLeft', [
-      transition('void=> *', [style({ transform: 'translateX(300px)' }),
-      animate('1s 300ms ease-in-out', style({ transform: 'translateX(0)' }))
-      ]),
-      transition('*=>void', [style({ transform: 'translateX(0px)' }),
-      animate('1s 300ms ease-in-out', style({ transform: 'translateX(-300px)' }))
-      ])
-    ]),
-
-    //create anumation for the movie image to move from right to left when the image is visible in the viewport
-    trigger('moveInRight', [
-      transition('void=> *', [style({ transform: 'translateX(-300px)' }),
-      animate('1s 300ms ease-in-out', style({ transform: 'translateX(0)' }))
-      ]),
-      transition('*=>void', [style({ transform: 'translateX(0px)' }),
-      animate('1s 300ms ease-in-out', style({ transform: 'translateX(300px)' }))
-      ])
+    trigger('fadeIn', [
+      state('loading', style({ opacity: 0 })),
+      state('loaded', style({ opacity: 1 })),
+      transition('loading => loaded', animate('2s ease-in')),
+      transition('loaded => loading', animate('0.5s ease-out'))
     ])
-
-  ],
+  ]
 })
 export class MoveComponent {
   isOpen = true;
@@ -82,7 +48,7 @@ export class MoveComponent {
    addResizedTextToImageUrl(): string {
     const resizedText = "_V1_FM_UX1000_";
     let imageUrl = this.movie.primaryImage.url; // Assuming `this.movie.primaryImage.url` holds the original image URL.
-  
+    console.log('image url: ' + imageUrl);  
     const filenameRegex = /\/([^/]+)(\.jpg)$/i;
     const matches = imageUrl.match(filenameRegex);
   

@@ -1,17 +1,15 @@
 <!-- search bar + filters -->
-  <div class="row mt-4">
-    <div class="col-md-6">
-      <div class="input-group mb-3">
-        <input #search type="search" (change)="Search(search.value)" placeholder="What're you searching for?" aria-describedby="searchbtn" class="form-control bg-none border-0 rounded-pill">
-        <div class="input-group-append">
-          <button (click)="Search(search.value)" id="searchbtn" type="button" class="btn btn-dark btn-block"><i class="bi bi-search"></i></button>
-        </div>
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="input-group mb-3 d-flex gap-3 ">
+      <input #search type="search" (change)="Search(search.value)" placeholder="Search movies" aria-describedby="searchbtn" class="form-control bg-none border-0 rounded-pill">
+      <div class="input-group-append d-flex  gap-2 ">
+        <button (click)="Search(search.value)" id="searchbtn" type="button" class="btn btn-dark rounded-pill"><i class="bi bi-search"></i></button>
+        <button class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#sm">Filters</button>
       </div>
     </div>
-    <div class="col-md-4 justify-content-end">
-      <span class="btn btn-dark btn-block float-end float-sm-none" data-bs-toggle="modal" data-bs-target="#sm">Filters</span>
-    </div>
   </div>
+</div>
 
 
 
@@ -36,7 +34,7 @@
 <!-- Showing movies in list -->
 <div *ngIf="Movies">
   <div class="row">
-    <div class="col-12 col-sm-6 col-md-4" *ngFor="let Movie of Movies">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let Movie of Movies">
       <app-move
         data-bs-toggle="modal"
         data-bs-target="#ex"

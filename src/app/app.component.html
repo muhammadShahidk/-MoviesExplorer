@@ -4,7 +4,10 @@
 <!-- sidebar -->
 <app-sidebar  [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'" class="sidebar shadow bg-body-tertiary overflow-x-scroll"
   style="left: 0; z-index: 5"
-  (selectedOption)="isSidbarOpend = sideBarResponse($event) ;SelectedGenre = $event"></app-sidebar>
+  (selectedOption)="isSidbarOpend = sideBarResponse($event) ;SelectedGenre = $event"
+  [@sidebarAnimation]="isSidbarOpend ? 'open' : 'closed'"></app-sidebar>
+
+
 <!-- backdrop -->
 <div (click)="isSidbarOpend = false;" [ngClass]="isSidbarOpend == true ? 'd-block' : 'd-none'" class="sidebar-backdrop">
 </div>

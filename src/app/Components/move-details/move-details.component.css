@@ -6,10 +6,10 @@
 
 .moveDetials__img {
     border: 1px solid #fff;
-    height: 85%;
+    height: 100%;
     position: sticky;
     top: 0;
-    object-fit: center;
+    object-fit: cover;
     object-position: center;
 }
 
